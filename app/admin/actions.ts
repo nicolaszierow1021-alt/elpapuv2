@@ -223,10 +223,7 @@ export async function getVipUsers() {
       .select('id, email, username, role, vip_until')
       .in('role', ['vip', 'admin']);
       
-    // Si hay un SUPER_ADMIN definido en variables de entorno, lo ocultamos de la tabla
-    if (process.env.SUPER_ADMIN_ID) {
-      query = query.neq('id', process.env.SUPER_ADMIN_ID);
-    }
+    // Ya no ocultamos al SUPER_ADMIN para que puedas verte a ti mismo en la lista
     
     const { data, error } = await query.order('created_at', { ascending: false });
       
