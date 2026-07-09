@@ -40,11 +40,11 @@ export default async function AdminDashboard({ searchParams }: { searchParams: {
               <span>Volver a Inicio</span>
             </Link>
             <div className="h-4 w-px bg-[#1f1f23]"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-[#00d0d0] to-[#0070f3] flex items-center justify-center shadow-[0_0_15px_rgba(0,208,208,0.3)]">
-                <Activity className="w-3.5 h-3.5 text-white" />
+            <div className="flex items-center gap-2 group cursor-default">
+              <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-[#00d0d0] to-[#0070f3] flex items-center justify-center shadow-[0_0_15px_rgba(0,208,208,0.3)] animate-pulse group-hover:animate-none group-hover:scale-110 group-hover:shadow-[0_0_25px_rgba(0,208,208,0.6)] transition-all duration-300">
+                <Activity className="w-3.5 h-3.5 text-white animate-bounce" />
               </div>
-              <span className="font-black text-white tracking-tight text-lg">Admin Workspace</span>
+              <span className="font-black text-white tracking-tight text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#00d0d0] group-hover:to-[#0070f3] transition-all duration-300">Admin Workspace</span>
             </div>
           </div>
           <div className="flex items-center gap-3">
