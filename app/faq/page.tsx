@@ -11,7 +11,7 @@ const faqs = [
     icon: <Download className="w-6 h-6 text-cyan-400" />,
     questions: [
       {
-        q: '¿Cómo descargar de PelisEnHD?',
+        q: '¿Cómo descargar de PAPUMOVIE?',
         a: 'Para descargar, dirígete a la página de la película o serie y haz clic en el botón de descarga. Si eres usuario VIP, tendrás acceso directo a los enlaces sin publicidad. Si eres usuario gratuito, es posible que debas pasar por un acortador antes de ver los enlaces.'
       },
       {
@@ -37,7 +37,7 @@ const faqs = [
         a: 'Los enlaces VIP utilizan servidores premium mucho más rápidos (como Google Drive, 1Fichier Premium, etc.) que tienen un coste de mantenimiento elevado. Al adquirir VIP, apoyas a la plataforma y a cambio obtienes acceso a estos servidores de alta velocidad y libres de publicidad.'
       },
       {
-        q: '¿Qué servidores de descarga usamos en PelisEnHD?',
+        q: '¿Qué servidores de descarga usamos en PAPUMOVIE?',
         a: 'Dependiendo del plan, usamos servidores gratuitos como Mega, Mediafire o Terabox, y servidores exclusivos VIP como Google Drive o enlaces directos sin límites de cuota.'
       },
       {
@@ -56,10 +56,10 @@ const faqs = [
       },
       {
         q: '¿Por qué no subimos calidad CAM?',
-        a: 'En PelisEnHD nuestro compromiso es con la calidad. Las versiones CAM (grabadas del cine con cámara) ofrecen una experiencia de video y audio muy pobre. Preferimos esperar a que salgan versiones WEB-DL, Blu-Ray o al menos HD-Rip para garantizar que disfrutes el contenido como se debe.'
+        a: 'En PAPUMOVIE nuestro compromiso es con la calidad. Las versiones CAM (grabadas del cine con cámara) ofrecen una experiencia de video y audio muy pobre. Preferimos esperar a que salgan versiones WEB-DL, Blu-Ray o al menos HD-Rip para garantizar que disfrutes el contenido como se debe.'
       },
       {
-        q: 'Una película ha salido en el cine ¿Cuando estará disponible en PelisEnHD?',
+        q: 'Una película ha salido en el cine ¿Cuando estará disponible en PAPUMOVIE?',
         a: 'Por lo general, las películas llegan a nuestra plataforma entre 45 y 90 días después de su estreno en cines, cuando son lanzadas oficialmente en plataformas de streaming (WEB-DL) o en formato físico.'
       },
       {
@@ -105,7 +105,7 @@ const faqs = [
 function AccordionItem({ q, a, isOpen, onClick }: { q: string, a: string, isOpen: boolean, onClick: () => void }) {
   return (
     <div className="border border-[#1f1f23] rounded-xl overflow-hidden bg-[#121215] mb-3 transition-all duration-300 hover:border-cyan-500/30">
-      <button 
+      <button
         onClick={onClick}
         className="w-full flex items-center justify-between p-5 text-left bg-transparent outline-none focus:outline-none"
       >
@@ -114,7 +114,7 @@ function AccordionItem({ q, a, isOpen, onClick }: { q: string, a: string, isOpen
         </span>
         <ChevronDown className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-cyan-400' : 'text-gray-500'}`} />
       </button>
-      <div 
+      <div
         className="transition-all duration-300 ease-in-out overflow-hidden"
         style={{ maxHeight: isOpen ? '500px' : '0', opacity: isOpen ? 1 : 0 }}
       >
@@ -143,7 +143,7 @@ export default function FAQPage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full pointer-events-none">
           <div className="absolute inset-0 bg-cyan-500/5 blur-[120px] rounded-full" />
         </div>
-        
+
         <div className="relative max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#16161a] border border-[#1f1f23] mb-6 shadow-xl">
             <HelpCircle className="w-8 h-8 text-cyan-400" />
@@ -168,10 +168,10 @@ export default function FAQPage() {
                 </div>
                 <h2 className="text-2xl font-bold text-white">{section.category}</h2>
               </div>
-              
+
               <div className="pl-0 sm:pl-14">
                 {section.questions.map((faq, faqIdx) => (
-                  <AccordionItem 
+                  <AccordionItem
                     key={faqIdx}
                     q={faq.q}
                     a={faq.a}
