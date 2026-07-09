@@ -59,21 +59,12 @@ export const metadata: Metadata = {
 
 import { GlobalAds } from "@/components/GlobalAds";
 import { AuthProvider } from "@/components/AuthProvider";
-import { createClient } from "@/utils/supabase/server";
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-  const { data: { session } } = await supabase.auth.getSession();
-  let profile = null;
-  
-  if (session?.user) {
-    const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-    if (data) profile = data;
-  }
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -113,7 +104,7 @@ export default async function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} antialiased h-full`}>
       <body className="min-h-full flex flex-col bg-background text-text-primary font-sans">
-        <AuthProvider serverSession={session} serverProfile={profile}>
+        <AuthProvider serverSession={null} serverProfile={null}>
           <GlobalAds />
           <script
             type="application/ld+json"

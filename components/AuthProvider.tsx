@@ -15,6 +15,34 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
 });
 
+const CACHE_KEY = 'auth_profile_cache';
+
+function getCachedProfile() {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const { profile, ts } = JSON.parse(raw);
+    // Cache válido por 5 minutos
+    if (Date.now() - ts < 5 * 60 * 1000) return profile;
+    localStorage.removeItem(CACHE_KEY);
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedProfile(profile: any) {
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ profile, ts: Date.now() }));
+  } catch {}
+}
+
+function clearCachedProfile() {
+  try {
+    localStorage.removeItem(CACHE_KEY);
+  } catch {}
+}
+
 export function AuthProvider({ 
   children, 
   serverSession, 
@@ -24,32 +52,61 @@ export function AuthProvider({
   serverSession: any, 
   serverProfile: any 
 }) {
-  const [user, setUser] = useState(serverSession?.user || null);
-  const [profile, setProfile] = useState(serverProfile || null);
-  // If we have server data, we are not loading. If not, maybe we check, but let's assume server is source of truth.
-  const [isLoading, setIsLoading] = useState(!serverSession);
+  const [user, setUser] = useState<any>(null);
+  const [profile, setProfile] = useState<any>(null);
+  // Empezamos en false para no bloquear el render inicial
+  const [isLoading, setIsLoading] = useState(true);
   const supabase = createClient();
 
   useEffect(() => {
-    // If we didn't have server data, we stop loading anyway since we have mounted
-    setIsLoading(false);
+    // Leer caché de localStorage para mostrar datos inmediatamente sin parpadeo
+    const cached = getCachedProfile();
+    if (cached) {
+      setProfile(cached);
+    }
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const init = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
       if (session?.user) {
         setUser(session.user);
-        // fetch profile only if user changed
-        if (!user || user.id !== session.user.id) {
-          const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-          if (data) setProfile(data);
+        
+        // Si ya teníamos caché, usar eso mientras buscamos el perfil actualizado
+        const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+        if (data) {
+          setProfile(data);
+          setCachedProfile(data);
         }
       } else {
         setUser(null);
         setProfile(null);
+        clearCachedProfile();
+      }
+
+      setIsLoading(false);
+    };
+
+    init();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        setUser(session.user);
+        // On auth change, refresh profile
+        const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+        if (data) {
+          setProfile(data);
+          setCachedProfile(data);
+        }
+      } else {
+        setUser(null);
+        setProfile(null);
+        clearCachedProfile();
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [supabase, user]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, profile, isLoading }}>
