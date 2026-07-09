@@ -230,7 +230,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
                 <div className="hidden sm:flex flex-wrap items-center gap-1.5 mt-2 justify-center md:justify-start">
                   <span className="text-[10px] uppercase tracking-wider text-text-secondary/60 font-medium mr-1">Idiomas:</span>
                   {/* Deduplicar: solo mostrar cada idioma una vez, ignorar codec */}
-                  {Array.from(new Set(
+                  {Array.from<string>(new Set(
                     (movie.audio_languages || [])
                       .filter((l: string) => l.trim())
                       .map((lang: string) => lang.split(/\s+(AC3|AAC|DTS|FLAC|MP3)/i)[0].trim())
