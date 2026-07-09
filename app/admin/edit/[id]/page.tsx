@@ -53,6 +53,24 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
     setFormData({ ...formData, [field]: arr });
   };
 
+  const toggleAudioLanguage = (lang: string) => {
+    const current = formData.audio_languages || [];
+    if (current.includes(lang)) {
+      setFormData({ ...formData, audio_languages: current.filter((l: string) => l !== lang) });
+    } else {
+      setFormData({ ...formData, audio_languages: [...current, lang] });
+    }
+  };
+
+  const AVAILABLE_LANGUAGES = [
+    { name: 'Latino', flag: 'fi-mx' },
+    { name: 'Castellano', flag: 'fi-es' },
+    { name: 'Inglés', flag: 'fi-us' },
+    { name: 'Japonés', flag: 'fi-jp' },
+    { name: 'Coreano', flag: 'fi-kr' },
+    { name: 'Francés', flag: 'fi-fr' }
+  ];
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
@@ -136,16 +154,96 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                   <input name="file_size" value={formData.file_size || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
+                  <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Contraseña</label>
+                  <input name="password" value={formData.password || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold tracking-wider text-violet-400 uppercase">Categoría</label>
+                  <select name="category" value={formData.category || 'Película'} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                    <option value="Película">Película</option>
+                    <option value="SeriesTV">Series TV</option>
+                    <option value="Anime">Anime</option>
+                  </select>
+                </div>
+                <div className="space-y-3 md:col-span-2">
+                  <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Pistas de Audio (INFORMACIÓN GENERAL)</label>
+                  <p className="text-xs text-gray-500">Cada entrada es un "Audio #N" en la ficha técnica. Ej: <span className="text-cyan-400">Latino AC3 5.1</span></p>
+                  <div className="flex flex-col gap-2">
+                    {(formData.audio_languages || ['']).map((lang: string, idx: number) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <span className="text-xs font-mono text-gray-500 shrink-0 w-16">Audio #{idx + 1}</span>
+                        <div className="flex flex-1 gap-2">
+                          <select
+                            value={lang.split(/\s+(AC3|AAC|DTS|FLAC|MP3)/i)[0]?.trim() || ''}
+                            onChange={(e) => {
+                              const codec = lang.match(/\s+(AC3.*|AAC.*|DTS.*|FLAC.*|MP3.*)/i)?.[1] || 'AC3 5.1';
+                              const newArr = [...(formData.audio_languages || [])];
+                              newArr[idx] = e.target.value ? `${e.target.value} ${codec}` : '';
+                              setFormData({ ...formData, audio_languages: newArr });
+                            }}
+                            className="flex-1 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                          >
+                            <option value="">Seleccionar idioma</option>
+                            <option value="Latino">Latino</option>
+                            <option value="Castellano">Castellano</option>
+                            <option value="Inglés">Inglés</option>
+                            <option value="Japonés">Japonés</option>
+                            <option value="Coreano">Coreano</option>
+                            <option value="Francés">Francés</option>
+                            <option value="Portugués">Portugués</option>
+                            <option value="Alemán">Alemán</option>
+                            <option value="Italiano">Italiano</option>
+                          </select>
+                          <select
+                            value={lang.match(/\s+(AC3.*|AAC.*|DTS.*|FLAC.*|MP3.*)/i)?.[1] || 'AC3 5.1'}
+                            onChange={(e) => {
+                              const base = lang.split(/\s+(AC3|AAC|DTS|FLAC|MP3)/i)[0]?.trim() || 'Latino';
+                              const newArr = [...(formData.audio_languages || [])];
+                              newArr[idx] = `${base} ${e.target.value}`;
+                              setFormData({ ...formData, audio_languages: newArr });
+                            }}
+                            className="w-36 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                          >
+                            <option value="AC3 5.1">AC3 5.1</option>
+                            <option value="AC3 2.0">AC3 2.0</option>
+                            <option value="AAC 2.0">AAC 2.0</option>
+                            <option value="AAC 5.1">AAC 5.1</option>
+                            <option value="DTS 5.1">DTS 5.1</option>
+                            <option value="DTS-HD MA 7.1">DTS-HD MA 7.1</option>
+                            <option value="TrueHD 7.1">TrueHD 7.1</option>
+                            <option value="FLAC 5.1">FLAC 5.1</option>
+                          </select>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newArr = (formData.audio_languages || []).filter((_: string, i: number) => i !== idx);
+                              setFormData({ ...formData, audio_languages: newArr.length > 0 ? newArr : [''] });
+                            }}
+                            className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors shrink-0"
+                            title="Eliminar pista"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, audio_languages: [...(formData.audio_languages || []), 'Latino AC3 5.1'] })}
+                    className="flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors mt-1 border border-cyan-500/30 hover:border-cyan-500/60 px-3 py-1.5 rounded-lg"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                    Añadir pista de audio
+                  </button>
+                </div>
+                <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-yellow-500/80 uppercase">Nombre de Colección (Saga)</label>
                   <input name="collection_name" value={formData.collection_name || ''} onChange={handleChange} placeholder="Ej. Avengers Collection" className="w-full bg-black/40 border border-yellow-500/20 focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-yellow-500/80 uppercase">Póster de Colección (URL)</label>
                   <input name="collection_poster_url" value={formData.collection_poster_url || ''} onChange={handleChange} placeholder="https://..." className="w-full bg-black/40 border border-yellow-500/20 focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Idiomas (separados por coma)</label>
-                  <input value={formData.audio_languages?.join(', ') || ''} onChange={(e) => handleArrayChange(e, 'audio_languages')} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Sinopsis</label>
@@ -160,23 +258,93 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                 Enlaces de Descarga
               </h2>
               <div className="space-y-6">
-                <div className="space-y-2 relative">
-                  <label className="text-xs font-bold tracking-wider text-yellow-500 uppercase flex items-center gap-2">Enlace VIP <Crown className="w-3 h-3" /></label>
-                  <input 
-                    value={formData.links_vip?.[0]?.url || ''} 
-                    onChange={(e) => setFormData({...formData, links_vip: [{ url: e.target.value, server: 'VIP' }]})} 
-                    placeholder="https://servidor-vip.com/..."
-                    className="w-full bg-yellow-500/5 border border-yellow-500/20 focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" 
-                  />
+                {/* VIP Links */}
+                <div>
+                  <label className="text-xs font-bold tracking-wider text-yellow-500 uppercase flex items-center gap-2 mb-3">
+                    <Crown className="w-3.5 h-3.5" /> ENLACES VIP
+                  </label>
+                  <div className="space-y-3">
+                    {(formData.links_vip || []).map((link: any, idx: number) => (
+                      <div key={idx} className="flex gap-2">
+                        <input
+                          value={link.server || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.links_vip || [])];
+                            updated[idx] = { ...updated[idx], server: e.target.value };
+                            setFormData({ ...formData, links_vip: updated });
+                          }}
+                          placeholder="Servidor (ej: MegaUp)"
+                          className="w-28 bg-yellow-500/5 border border-yellow-500/20 focus:border-yellow-500/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
+                        />
+                        <input
+                          value={link.url || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.links_vip || [])];
+                            updated[idx] = { ...updated[idx], url: e.target.value };
+                            setFormData({ ...formData, links_vip: updated });
+                          }}
+                          placeholder="https://..."
+                          className="flex-1 bg-yellow-500/5 border border-yellow-500/20 focus:border-yellow-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
+                        />
+                        <button
+                          onClick={() => {
+                            const updated = (formData.links_vip || []).filter((_: any, i: number) => i !== idx);
+                            setFormData({ ...formData, links_vip: updated });
+                          }}
+                          className="px-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors text-lg leading-none"
+                        >×</button>
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => setFormData({ ...formData, links_vip: [...(formData.links_vip || []), { url: '', server: 'VIP' }] })}
+                      className="w-full py-2.5 rounded-lg border border-dashed border-yellow-500/30 text-yellow-500/60 hover:text-yellow-500 hover:border-yellow-500/60 text-sm font-bold transition-colors"
+                    >+ Añadir enlace VIP</button>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-xs font-bold tracking-wider text-cyan-400 uppercase">Enlace Público (Free)</label>
-                  <input 
-                    value={formData.links_free?.[0]?.url || ''} 
-                    onChange={(e) => setFormData({...formData, links_free: [{ url: e.target.value, server: 'Free' }]})} 
-                    placeholder="https://servidor-gratis.com/..."
-                    className="w-full bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" 
-                  />
+
+                {/* Free Links */}
+                <div>
+                  <label className="text-xs font-bold tracking-wider text-cyan-400 uppercase flex items-center gap-2 mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    ENLACES PÚBLICOS (FREE)
+                  </label>
+                  <div className="space-y-3">
+                    {(formData.links_free || []).map((link: any, idx: number) => (
+                      <div key={idx} className="flex gap-2">
+                        <input
+                          value={link.server || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.links_free || [])];
+                            updated[idx] = { ...updated[idx], server: e.target.value };
+                            setFormData({ ...formData, links_free: updated });
+                          }}
+                          placeholder="Servidor"
+                          className="w-28 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
+                        />
+                        <input
+                          value={link.url || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.links_free || [])];
+                            updated[idx] = { ...updated[idx], url: e.target.value };
+                            setFormData({ ...formData, links_free: updated });
+                          }}
+                          placeholder="https://..."
+                          className="flex-1 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
+                        />
+                        <button
+                          onClick={() => {
+                            const updated = (formData.links_free || []).filter((_: any, i: number) => i !== idx);
+                            setFormData({ ...formData, links_free: updated });
+                          }}
+                          className="px-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors text-lg leading-none"
+                        >×</button>
+                      </div>
+                    ))}
+                    <button
+                      onClick={() => setFormData({ ...formData, links_free: [...(formData.links_free || []), { url: '', server: 'Free' }] })}
+                      className="w-full py-2.5 rounded-lg border border-dashed border-cyan-500/30 text-cyan-500/60 hover:text-cyan-500 hover:border-cyan-500/60 text-sm font-bold transition-colors"
+                    >+ Añadir enlace Free</button>
+                  </div>
                 </div>
               </div>
             </div>

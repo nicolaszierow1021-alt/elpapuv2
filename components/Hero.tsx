@@ -39,8 +39,8 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
       {movies.map((movie, index) => {
         const isActive = index === currentSlide;
         
-        // Mock views for demonstration, could be dynamic in the future
-        const views = (Math.random() * 5 + 1).toFixed(1) + 'K';
+        // Mock views for demonstration (deterministic to avoid hydration mismatch)
+        const views = ((movie.title.length % 5) + 1.5).toFixed(1) + 'K';
         
         // Parse resolution badge (similar to what we did in MovieCard)
         const rawRes = movie.resolution?.toUpperCase() || '';
@@ -132,10 +132,10 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
                   {/* Actions */}
                   <div className="pt-3">
                     <Link href={`/pelicula/${movie.id}`}>
-                      <Button className="rounded-full font-bold bg-[#00cce6] text-black hover:bg-[#00cce6]/90 px-6 py-2 h-auto text-sm">
+                      <button className="flex items-center justify-center gap-2 rounded-full font-bold bg-gradient-to-r from-[#00cce6] to-[#00a8cc] text-black hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(0,204,230,0.3)] hover:shadow-[0_0_30px_rgba(0,204,230,0.5)] px-7 py-2.5 text-sm w-fit">
                         Ver Detalles
-                        <ChevronRight className="w-4 h-4 ml-1" />
-                      </Button>
+                        <ChevronRight className="w-4 h-4 ml-0.5 stroke-[3]" />
+                      </button>
                     </Link>
                   </div>
 

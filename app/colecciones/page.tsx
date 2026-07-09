@@ -115,7 +115,6 @@ export default async function ColeccionesPage() {
           <div className="flex flex-col items-center justify-center py-32 text-gray-500">
             <Library className="w-16 h-16 mb-4 opacity-20" />
             <p className="text-lg font-medium">No hay colecciones disponibles aún.</p>
-            <p className="text-sm mt-2 text-gray-600">Añade películas que pertenezcan a una saga desde el panel de administración.</p>
           </div>
         )}
       </main>

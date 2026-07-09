@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS public.movies (
   genres text[],
   links_vip jsonb DEFAULT '[]'::jsonb,
   links_free jsonb DEFAULT '[]'::jsonb,
+  category text DEFAULT 'Película', -- 'Película', 'SeriesTV', 'Anime'
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now()
 );
@@ -65,6 +66,7 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   username text UNIQUE,
   email text UNIQUE NOT NULL,
   role text DEFAULT 'user', -- 'admin', 'user', 'vip'
+  vip_until timestamp with time zone,
   created_at timestamp with time zone DEFAULT now()
 );
 
@@ -85,3 +87,30 @@ CREATE POLICY "Users can insert their own profile."
 CREATE POLICY "Users can update own profile."
   ON profiles FOR UPDATE
   USING ( auth.uid() = id );
+
+-- 5. Create comments table
+CREATE TABLE IF NOT EXISTS public.comments (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  movie_id uuid REFERENCES public.movies(id) ON DELETE CASCADE,
+  user_id uuid REFERENCES public.profiles(id) ON DELETE CASCADE,
+  content text NOT NULL,
+  created_at timestamp with time zone DEFAULT now()
+);
+
+-- Enable RLS on comments
+ALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access to comments
+CREATE POLICY "Allow public read access on comments"
+  ON public.comments FOR SELECT
+  USING (true);
+
+-- Authenticated users can insert their own comments
+CREATE POLICY "Users can insert own comments"
+  ON public.comments FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+-- Users can delete their own comments
+CREATE POLICY "Users can delete own comments"
+  ON public.comments FOR DELETE
+  USING (auth.uid() = user_id);

@@ -69,6 +69,8 @@ const getFlagClass = (lang: string) => {
   if (l.includes('castellano') || l.includes('españa') || l.includes('cas')) return { flag: 'fi fi-es', text: 'CAS' };
   if (l.includes('inglés') || l.includes('ingles') || l.includes('ing')) return { flag: 'fi fi-us', text: 'ING' };
   if (l.includes('japonés') || l.includes('japones') || l.includes('jap')) return { flag: 'fi fi-jp', text: 'JAP' };
+  if (l.includes('coreano') || l.includes('cor')) return { flag: 'fi fi-kr', text: 'COR' };
+  if (l.includes('francés') || l.includes('frances') || l.includes('fra')) return { flag: 'fi fi-fr', text: 'FRA' };
   return { flag: 'fi fi-un', text: lang.substring(0, 3).toUpperCase() };
 };
 
@@ -168,24 +170,31 @@ export function MovieCard({ movie }: MovieCardProps) {
           </div>
 
           {/* Audio Flags */}
-          {movie.audio_languages && movie.audio_languages.length > 0 && (
-            <div className="flex items-center gap-1.5">
-              {movie.audio_languages.map((lang, idx) => {
-                const { flag, text } = getFlagClass(lang);
-                return (
-                  <React.Fragment key={idx}>
-                    <div className="flex items-center gap-1">
-                      <span className={`${flag} rounded-sm w-3 h-[9px] overflow-hidden drop-shadow-sm`}></span>
-                      <span className="text-[8px] font-bold text-gray-300 uppercase tracking-wide">{text}</span>
-                    </div>
-                    {idx < movie.audio_languages!.length - 1 && (
-                      <span className="text-[8px] text-gray-600 font-black">|</span>
-                    )}
-                  </React.Fragment>
-                );
-              })}
-            </div>
-          )}
+          {movie.audio_languages && movie.audio_languages.length > 0 && (() => {
+            // Deduplicate: map all langs, then filter out duplicates by abbreviation and unknowns
+            const seen = new Set<string>();
+            const unique = movie.audio_languages
+              .map(lang => getFlagClass(lang))
+              .filter(({ flag, text }) => {
+                if (flag === 'fi fi-un') return false; // hide unknown
+                if (seen.has(text)) return false;      // hide duplicates
+                seen.add(text);
+                return true;
+              });
+
+            if (unique.length === 0) return null;
+
+            return (
+              <div className="flex items-center flex-wrap gap-x-1.5 gap-y-1">
+                {unique.map(({ flag, text }, idx) => (
+                  <div key={idx} className="flex items-center gap-0.5">
+                    <span className={`${flag} rounded-sm w-3 h-[9px] overflow-hidden drop-shadow-sm shrink-0`}></span>
+                    <span className="text-[8px] font-bold text-gray-300 uppercase tracking-wide leading-none">{text}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </div>
 

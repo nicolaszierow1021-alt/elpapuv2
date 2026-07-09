@@ -28,6 +28,7 @@ export async function saveMovie(data: any) {
         genres: data.genres,
         links_vip: data.links_vip,
         links_free: data.links_free,
+        category: data.category || 'Película',
         collection_id: data.collection_id,
         collection_name: data.collection_name,
         collection_poster_url: data.collection_poster_url,
@@ -110,6 +111,7 @@ export async function updateMovie(id: string, data: any) {
         genres: data.genres,
         links_vip: data.links_vip,
         links_free: data.links_free,
+        category: data.category || 'Película',
         collection_id: data.collection_id,
         collection_name: data.collection_name,
         collection_poster_url: data.collection_poster_url,
@@ -142,5 +144,96 @@ export async function getMovieById(id: string) {
   } catch (error: any) {
     console.error("Failed to fetch movie:", error);
     return { success: false, error: error.message || 'Unknown error occurred' };
+  }
+}
+
+export async function grantVipRole(email: string, durationMonths?: number) {
+  try {
+    // First check if user is admin
+    const { data: userProfile, error: fetchError } = await supabaseAdmin
+      .from('profiles')
+      .select('role')
+      .eq('email', email)
+      .single();
+      
+    if (fetchError || !userProfile) {
+      return { success: false, error: "No se encontró ningún usuario con ese correo electrónico." };
+    }
+    
+    if (userProfile.role === 'admin') {
+      return { success: false, error: "Este usuario es Administrador y ya cuenta con todos los privilegios VIP." };
+    }
+
+    let vip_until = null;
+    if (durationMonths && durationMonths > 0) {
+      const date = new Date();
+      date.setMonth(date.getMonth() + durationMonths);
+      vip_until = date.toISOString();
+    }
+
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update({ role: 'vip', vip_until })
+      .eq('email', email);
+
+    if (error) throw error;
+    
+    return { success: true, message: `Rol VIP otorgado${durationMonths ? ` por ${durationMonths} mes(es)` : ' permanentemente'}` };
+  } catch (error) {
+    console.error("Failed to grant VIP role:", error);
+    return { success: false, error: "Error al otorgar VIP. Verifica que el correo exista." };
+  }
+}
+
+export async function revokeVipRole(email: string) {
+  try {
+    // Check if user is admin first
+    const { data: userProfile, error: fetchError } = await supabaseAdmin
+      .from('profiles')
+      .select('role')
+      .eq('email', email)
+      .single();
+      
+    if (fetchError || !userProfile) {
+      return { success: false, error: "No se encontró ningún usuario con ese correo electrónico." };
+    }
+    
+    if (userProfile.role === 'admin') {
+      return { success: false, error: "No puedes revocar privilegios a un Administrador." };
+    }
+
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update({ role: 'user', vip_until: null })
+      .ilike('email', email.trim());
+
+    if (error) throw error;
+    
+    return { success: true, message: `Rol VIP removido exitosamente a ${email}` };
+  } catch (error: any) {
+    console.error("Failed to revoke VIP role:", error);
+    return { success: false, error: error.message || 'Ocurrió un error desconocido' };
+  }
+}
+
+export async function getVipUsers() {
+  try {
+    let query = supabaseAdmin
+      .from('profiles')
+      .select('id, email, username, role, vip_until')
+      .in('role', ['vip', 'admin']);
+      
+    // Si hay un SUPER_ADMIN definido en variables de entorno, lo ocultamos de la tabla
+    if (process.env.SUPER_ADMIN_ID) {
+      query = query.neq('id', process.env.SUPER_ADMIN_ID);
+    }
+    
+    const { data, error } = await query.order('created_at', { ascending: false });
+      
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Error fetching VIP users:", error);
+    return [];
   }
 }
