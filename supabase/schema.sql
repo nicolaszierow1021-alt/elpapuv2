@@ -114,3 +114,16 @@ CREATE POLICY "Users can insert own comments"
 CREATE POLICY "Users can delete own comments"
   ON public.comments FOR DELETE
   USING (auth.uid() = user_id);
+
+
+
+
+
+UPDATE public.profiles
+SET role = 'user'
+WHERE id = 'AQUI_PON_EL_ID_DEL_USUARIO';
+
+
+UPDATE public.profiles
+SET role = 'admin'
+WHERE id = 'ed91d087-9f0b-4ecb-928a-0b42f279eafb'; 

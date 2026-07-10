@@ -199,12 +199,45 @@ export function Header() {
 
           {/* Mobile Toggles */}
           <div className="flex md:hidden items-center gap-1 ml-auto">
-            <button className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <button onClick={() => router.push('/buscar')} className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
               <Search className="w-5 h-5" />
             </button>
-            <button className="p-2 text-[#00d0d0] hover:text-[#00d0d0]/80 transition-colors cursor-pointer">
-              <LogIn className="w-5 h-5" />
-            </button>
+            {user ? (
+              <div className="relative">
+                <button 
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="p-2 flex items-center justify-center transition-colors cursor-pointer"
+                >
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-500 flex items-center justify-center text-[10px] font-bold text-white uppercase overflow-hidden ring-1 ring-white/10 shadow-sm">
+                    {profile?.avatar_url ? (
+                      <Image src={profile.avatar_url} alt="Avatar" width={24} height={24} className="object-cover" />
+                    ) : (
+                      profile?.username?.charAt(0) || user.email?.charAt(0)
+                    )}
+                  </div>
+                </button>
+                <div className={`absolute top-full right-0 pt-2 w-52 transition-all duration-200 z-50 ${isUserMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+                  <div className="bg-[#121215] border border-[#1f1f23] rounded-lg shadow-xl overflow-hidden py-2 flex flex-col relative">
+                    <div className="px-4 py-3 border-b border-[#1f1f23] mb-1 relative overflow-hidden">
+                      <p className="text-xs text-gray-400 mb-0.5">Conectado como</p>
+                      <p className="text-sm font-bold text-white truncate relative z-10">{profile?.username || user.email}</p>
+                    </div>
+                    {profile?.role === 'admin' && (
+                      <Link href="/admin" onClick={() => setIsUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm text-cyan-400 hover:text-cyan-300 hover:bg-[#1a1a20] transition-colors">
+                        <Settings className="w-4 h-4" /> Panel Admin
+                      </Link>
+                    )}
+                    <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-[#1a1a20] transition-colors text-left w-full mt-1">
+                      <LogOut className="w-4 h-4" /> Cerrar sesión
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link href="/login" className="p-2 text-[#00d0d0] hover:text-[#00d0d0]/80 transition-colors cursor-pointer block">
+                <LogIn className="w-5 h-5" />
+              </Link>
+            )}
             <button 
               className="p-2 text-gray-400 hover:text-white transition-colors cursor-pointer"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

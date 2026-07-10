@@ -350,6 +350,8 @@ export default function AddMoviePage() {
                       <option value="BDRIP">BDRIP</option>
                       <option value="WEB-DL">WEB-DL</option>
                       <option value="BLURAY">BLURAY</option>
+                      <option value="HDCAM">HDCAM</option>
+                      <option value="BRRIP">BRRIP</option>
                     </select>
                   </div>
                   <div className="space-y-2">
