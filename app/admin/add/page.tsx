@@ -349,6 +349,10 @@ export default function AddMoviePage() {
                       <option value="">Selecciona un formato</option>
                       <option value="BDRIP">BDRIP</option>
                       <option value="WEB-DL">WEB-DL</option>
+                      <option value="[WEB-DL] LIGERA">[WEB-DL] LIGERA</option>
+                      <option value="[WEB-DL] PESADA">[WEB-DL] PESADA</option>
+                      <option value="[WEB-DL 4K UHD HDR10]">[WEB-DL 4K UHD HDR10]</option>
+                      <option value="[WEB-DL 4K UHD SDR]">[WEB-DL 4K UHD SDR]</option>
                       <option value="BLURAY">BLURAY</option>
                       <option value="HDCAM">HDCAM</option>
                       <option value="BRRIP">BRRIP</option>
