@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function DMCAPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-gray-300">
+    <div className="min-h-screen flex flex-col bg-background text-gray-300">
       <Header />
       
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative">
-        <div className="flex items-center gap-4 mb-10 border-b border-[#1f1f23] pb-8">
+        <div className="flex items-center gap-4 mb-10 border-b border-border pb-8">
           <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center border border-red-500/20 shadow-[0_0_30px_rgba(239,68,68,0.15)]">
             <ShieldAlert className="w-8 h-8 text-red-500" />
           </div>
@@ -27,9 +27,9 @@ export default function DMCAPage() {
 
         <div className="space-y-8 text-[15px] leading-relaxed">
           
-          <div className="bg-[#121215] border border-[#1f1f23] rounded-2xl p-6 sm:p-8">
+          <div className="bg-surface border border-border rounded-2xl p-6 sm:p-8">
             <div className="flex items-center gap-3 mb-4 text-white">
-              <Info className="w-6 h-6 text-[#00d0d0]" />
+              <Info className="w-6 h-6 text-accent" />
               <h2 className="text-xl font-bold">Aviso Legal Importante</h2>
             </div>
             <p className="mb-4">
@@ -64,7 +64,7 @@ export default function DMCAPage() {
               <li>Prueba o declaración jurada bajo pena de perjurio que confirme que posees los derechos del material reclamado.</li>
               <li>Una declaración de que el uso del material de la forma reclamada no está autorizado por el propietario de los derechos de autor, su agente, o la ley.</li>
             </ul>
-            <div className="bg-[#0a0a0f] border border-red-500/20 rounded-xl p-5 mt-6">
+            <div className="bg-background border border-red-500/20 rounded-xl p-5 mt-6">
               <p className="text-sm text-gray-300 font-medium mb-3">Envía tu solicitud oficial a nuestro medio de contacto:</p>
               <a 
                 href="https://t.me/elpapujosh" 

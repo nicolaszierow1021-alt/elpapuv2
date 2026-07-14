@@ -27,10 +27,10 @@ export default async function PopularesPage() {
 
   const renderTop1Card = (item: any, isMovie: boolean) => {
     if (!item) return null;
-    const accentColor = isMovie ? 'text-[#00d0d0]' : 'text-violet-500';
+    const accentColor = isMovie ? 'text-accent' : 'text-violet-500';
     
     return (
-      <Link href={`/pelicula/${item.id}`} className="group block relative w-full h-[400px] md:h-[300px] rounded-2xl overflow-hidden bg-[#121215] border border-[#1f1f23] transition-all hover:border-[#333] mb-6">
+      <Link href={`/pelicula/${item.id}`} className="group block relative w-full h-[400px] md:h-[300px] rounded-2xl overflow-hidden bg-surface border border-border transition-all hover:border-[#333] mb-6">
         {/* Backdrop Image */}
         <div className="absolute inset-0 md:w-[60%]">
           <img 
@@ -39,8 +39,8 @@ export default async function PopularesPage() {
             className="w-full h-full object-cover object-top"
           />
           {/* Gradients to fade into the content */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#121215] via-[#121215]/50 to-transparent md:hidden" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#121215]/80 to-[#121215] hidden md:block" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent md:hidden" />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-surface/80 to-surface hidden md:block" />
         </div>
 
         {/* Large Number 1 */}
@@ -78,10 +78,10 @@ export default async function PopularesPage() {
   };
 
   const renderGridCards = (items: any[], isMovie: boolean) => {
-    const accentColor = isMovie ? 'text-[#00d0d0]' : 'text-violet-500';
+    const accentColor = isMovie ? 'text-accent' : 'text-violet-500';
     return items.slice(1, 7).map((item, index) => (
       <Link key={item.id} href={`/pelicula/${item.id}`} className="group flex flex-col gap-2 relative">
-        <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-[#121215] border border-[#1f1f23] transition-all duration-300 group-hover:border-gray-500/50">
+        <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface border border-border transition-all duration-300 group-hover:border-gray-500/50">
           <img 
             src={item.cover_url} 
             alt={item.title} 
@@ -125,7 +125,7 @@ export default async function PopularesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">

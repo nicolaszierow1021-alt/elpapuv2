@@ -54,7 +54,7 @@ export default async function PeliculasPage({
   ).sort((a, b) => b - a);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       {/* Hero Banner */}
@@ -66,8 +66,8 @@ export default async function PeliculasPage({
               alt={featured.title}
               className="w-full h-full object-cover object-top"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f] via-[#0a0a0f]/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
 
           <button className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/50 border border-white/10 flex items-center justify-center text-white hover:bg-black/80 transition-colors">
@@ -85,7 +85,7 @@ export default async function PeliculasPage({
                 </div>
               )}
               <span className="text-xs text-gray-300 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-[#00d0d0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
                 Película
               </span>
             </div>
@@ -99,7 +99,7 @@ export default async function PeliculasPage({
 
             <div className="flex flex-wrap gap-2 mb-3">
               {(featured.genres || []).slice(0, 3).map((g: string) => (
-                <span key={g} className="px-3 py-0.5 rounded-full bg-[#00d0d0]/10 border border-[#00d0d0]/30 text-xs text-[#00d0d0] font-medium">
+                <span key={g} className="px-3 py-0.5 rounded-full bg-accent/10 border border-[#00d0d0]/30 text-xs text-accent font-medium">
                   {g}
                 </span>
               ))}
@@ -123,8 +123,8 @@ export default async function PeliculasPage({
       <div className="max-w-7xl mx-auto w-full px-4 py-8 flex-1">
         {/* Section Header */}
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-9 h-9 rounded-lg bg-[#00d0d0]/10 border border-[#00d0d0]/20 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#00d0d0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
+          <div className="w-9 h-9 rounded-lg bg-accent/10 border border-[#00d0d0]/20 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
           </div>
           <div>
             <h2 className="text-xl font-bold text-white">Todas las películas</h2>
@@ -146,8 +146,8 @@ export default async function PeliculasPage({
               href={`/peliculas?sort=${tab.key}${genre ? `&genre=${genre}` : ''}${year ? `&year=${year}` : ''}`}
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
                 sort === tab.key
-                  ? 'bg-[#00d0d0] text-black'
-                  : 'text-gray-400 hover:text-white hover:bg-[#1a1a20]'
+                  ? 'bg-accent text-black'
+                  : 'text-gray-400 hover:text-white hover:bg-surface-hover'
               }`}
             >
               {tab.label}
@@ -156,15 +156,15 @@ export default async function PeliculasPage({
 
           {/* Genre dropdown */}
           <div className="relative group ml-1">
-            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-[#1f1f23] hover:border-[#00d0d0]/50 bg-[#121215] transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-border hover:border-[#00d0d0]/50 bg-surface transition-colors">
               {genre || 'Todos los Géneros'}
               <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div className="absolute top-full left-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-20">
-              <div className="bg-[#121215] border border-[#1f1f23] rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
-                <Link href={`/peliculas?sort=${sort}${year ? `&year=${year}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-[#1a1a20]">Todos los Géneros</Link>
+              <div className="bg-surface border border-border rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
+                <Link href={`/peliculas?sort=${sort}${year ? `&year=${year}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-surface-hover">Todos los Géneros</Link>
                 {allGenres.map(g => (
-                  <Link key={g} href={`/peliculas?sort=${sort}&genre=${encodeURIComponent(g)}${year ? `&year=${year}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-[#1a1a20] ${genre === g ? 'text-[#00d0d0]' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
+                  <Link key={g} href={`/peliculas?sort=${sort}&genre=${encodeURIComponent(g)}${year ? `&year=${year}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-surface-hover ${genre === g ? 'text-accent' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
                 ))}
               </div>
             </div>
@@ -172,15 +172,15 @@ export default async function PeliculasPage({
 
           {/* Year dropdown */}
           <div className="relative group">
-            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-[#1f1f23] hover:border-[#00d0d0]/50 bg-[#121215] transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-border hover:border-[#00d0d0]/50 bg-surface transition-colors">
               {year || 'Cualquier Año'}
               <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div className="absolute top-full left-0 pt-2 w-36 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-20">
-              <div className="bg-[#121215] border border-[#1f1f23] rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
-                <Link href={`/peliculas?sort=${sort}${genre ? `&genre=${genre}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-[#1a1a20]">Cualquier Año</Link>
+              <div className="bg-surface border border-border rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
+                <Link href={`/peliculas?sort=${sort}${genre ? `&genre=${genre}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-surface-hover">Cualquier Año</Link>
                 {years.map(y => (
-                  <Link key={y} href={`/peliculas?sort=${sort}&year=${y}${genre ? `&genre=${genre}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-[#1a1a20] ${year === String(y) ? 'text-[#00d0d0]' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
+                  <Link key={y} href={`/peliculas?sort=${sort}&year=${y}${genre ? `&genre=${genre}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-surface-hover ${year === String(y) ? 'text-accent' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
                 ))}
               </div>
             </div>

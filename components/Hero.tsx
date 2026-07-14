@@ -35,7 +35,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
   if (!movies || movies.length === 0) return null;
 
   return (
-    <div className="relative w-full h-[450px] md:h-[500px] overflow-hidden group/slider bg-[#0a0a0f]">
+    <div className="relative w-full h-[450px] md:h-[500px] overflow-hidden group/slider bg-background">
       {movies.map((movie, index) => {
         const isActive = index === currentSlide;
         
@@ -45,7 +45,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
         // Parse resolution badge (similar to what we did in MovieCard)
         const rawRes = movie.resolution?.toUpperCase() || '';
         let resText = '1080P';
-        let resColor = 'bg-[#00cce6] text-black';
+        let resColor = 'bg-accent text-black';
         
         if (rawRes.includes('4K') || rawRes.includes('UHD')) {
           resText = '4K UHD';
@@ -75,8 +75,8 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
                 />
               )}
               {/* Overlays for fading into the background color */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/80 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/90 via-[#0a0a0f]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
             </div>
 
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 lg:px-12 lg:pb-12 z-20">
@@ -109,7 +109,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
 
                   {/* Title */}
                   <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-md leading-tight">
-                    {movie.title} {movie.format ? `[${movie.format}]` : ''} 
+                    {movie.title} {movie.format ? (movie.format.startsWith('[') ? movie.format : `[${movie.format}]`) : ''} 
                     <span className="text-gray-500 font-normal ml-2 text-xl md:text-2xl">({movie.release_year || 'N/A'})</span>
                   </h1>
 
@@ -117,7 +117,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
                   {movie.genres && movie.genres.length > 0 && (
                     <div className="flex gap-2 flex-wrap">
                       {movie.genres.slice(0, 3).map((genre, i) => (
-                        <span key={i} className="px-2 py-0.5 rounded-full border border-[#00cce6]/30 bg-[#00cce6]/5 text-[#00cce6] text-[10px] font-semibold tracking-wide">
+                        <span key={i} className="px-2 py-0.5 rounded-full border border-accent/30 bg-accent/5 text-accent text-[10px] font-semibold tracking-wide">
                           {genre}
                         </span>
                       ))}
@@ -132,7 +132,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
                   {/* Actions */}
                   <div className="pt-3">
                     <Link href={`/pelicula/${movie.id}`}>
-                      <button className="flex items-center justify-center gap-2 rounded-full font-bold bg-gradient-to-r from-[#00cce6] to-[#00a8cc] text-black hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(0,204,230,0.3)] hover:shadow-[0_0_30px_rgba(0,204,230,0.5)] px-7 py-2.5 text-sm w-fit">
+                      <button className="flex items-center justify-center gap-2 rounded-full font-bold bg-gradient-to-r from-accent to-accent-hover text-black hover:scale-105 transition-all duration-300 shadow-[0_0_20px_var(--color-accent)] opacity-90 hover:opacity-100 hover:shadow-[0_0_30px_var(--color-accent)] px-7 py-2.5 text-sm w-fit">
                         Ver Detalles
                         <ChevronRight className="w-4 h-4 ml-0.5 stroke-[3]" />
                       </button>
@@ -154,7 +154,7 @@ export function Hero({ movies }: { movies: HeroMovie[] }) {
               key={index}
               onClick={() => setCurrentSlide(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-[#00cce6] w-6' : 'bg-white/30 hover:bg-white/50'
+                index === currentSlide ? 'bg-accent w-6' : 'bg-white/30 hover:bg-white/50'
               }`}
               aria-label={`Ir a la diapositiva ${index + 1}`}
             />

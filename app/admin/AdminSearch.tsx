@@ -33,7 +33,7 @@ export function AdminSearch() {
       </div>
       <input
         type="text"
-        className="block w-full pl-10 pr-10 py-2 border border-[#1f1f23] rounded-lg bg-[#121215] text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 focus:border-cyan-500/50 sm:text-sm transition-all"
+        className="block w-full pl-10 pr-10 py-2 border border-border rounded-lg bg-surface text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-accent/50 focus:border-accent/50 sm:text-sm transition-all"
         placeholder="Buscar por título (Películas o Series)..."
         value={text}
         onChange={(e) => setText(e.target.value)}

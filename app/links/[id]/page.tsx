@@ -41,10 +41,10 @@ export default async function LinksPage({ params, searchParams }: { params: Prom
   const linksText = links.map((l: any) => l.url).join('\n');
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
       <div className="flex-1 max-w-3xl mx-auto w-full p-4 sm:p-6 lg:p-8 pt-12">
-         <div className="bg-[#121215] border border-[#1f1f23] rounded-2xl p-6 md:p-8 shadow-2xl">
+         <div className="bg-surface border border-border rounded-2xl p-6 md:p-8 shadow-2xl">
            <div className="flex justify-center mb-4">
               <div className={`p-3 rounded-full ${type === 'vip' ? 'bg-warning/10 text-warning' : 'bg-accent/10 text-accent'}`}>
                  <svg xmlns="http://www.w3.org/2000/svg" className="size-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
@@ -63,7 +63,7 @@ export default async function LinksPage({ params, searchParams }: { params: Prom
                readOnly 
                value={linksText} 
                rows={Math.max(3, links.length)} 
-               className="w-full bg-[#0a0a0f] border border-[#1f1f23] rounded-xl p-4 text-sm font-mono text-gray-300 focus:outline-none focus:border-cyan-500/50 resize-none selection:bg-cyan-500/30"
+               className="w-full bg-background border border-border rounded-xl p-4 text-sm font-mono text-gray-300 focus:outline-none focus:border-accent/50 resize-none selection:bg-accent/30"
                placeholder="No hay enlaces para mostrar..."
              />
            </div>
@@ -74,7 +74,7 @@ export default async function LinksPage({ params, searchParams }: { params: Prom
                Enlaces directos
              </label>
              {links.map((link: any, i: number) => (
-               <div key={i} className="bg-[#0a0a0f] p-4 rounded-xl border border-[#1f1f23] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-cyan-500/30 transition-colors group">
+               <div key={i} className="bg-background p-4 rounded-xl border border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-accent/30 transition-colors group">
                  <div className="min-w-0 flex-1">
                    <span className="font-bold text-gray-200 block mb-1">{link.server || `Servidor ${i+1}`}</span>
                    <span className="font-mono text-xs text-text-secondary truncate block w-full">{link.url}</span>
@@ -86,7 +86,7 @@ export default async function LinksPage({ params, searchParams }: { params: Prom
              ))}
              
              {links.length === 0 && (
-               <p className="text-center text-gray-500 py-8 border border-dashed border-[#1f1f23] rounded-xl">No hay enlaces disponibles por el momento.</p>
+               <p className="text-center text-gray-500 py-8 border border-dashed border-border rounded-xl">No hay enlaces disponibles por el momento.</p>
              )}
            </div>
          </div>

@@ -23,12 +23,12 @@ export default function MembresiaVipPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col font-sans">
+    <div className="min-h-screen bg-background text-white flex flex-col font-sans">
       <Header />
       
       <div className="flex-1 w-full flex flex-col items-center pt-16 pb-24 px-4">
         {/* Acceso instantáneo pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#16161a] border border-[#1f1f23] mb-8">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface border border-border mb-8">
           <div className="size-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"></div>
           <span className="text-sm font-medium text-gray-300">Acceso Instantáneo</span>
         </div>
@@ -53,7 +53,7 @@ export default function MembresiaVipPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1200px] w-full">
           
           {/* Plan 1 Mes */}
-          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-[#1f1f23] hover:border-gray-600 transition-colors">
+          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-border hover:border-gray-600 transition-colors">
             <h3 className="text-lg font-medium text-white mb-2">PHD VIP 1 Mes</h3>
             <div className="flex items-baseline gap-1 mb-8">
               <span className="text-5xl font-bold tracking-tight">$13</span>
@@ -66,6 +66,8 @@ export default function MembresiaVipPage() {
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Sin Publicidad (Ni PopUps)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte por Telegram y correo</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Servidores Premium</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Temas Web Exclusivos</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Color de Nombre Único</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Prioridad a pedidos (1 por mes)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-700">{xIcon} Acceso a MEGA</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-700">{xIcon} Soporte para Series</li>
@@ -95,6 +97,8 @@ export default function MembresiaVipPage() {
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Sin Publicidad (Ni PopUps)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte por Telegram y correo</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Servidores Premium</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Temas Web Exclusivos</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Color de Nombre Único</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Prioridad a pedidos (1 por mes)</li>
               <li className="flex items-center gap-3 text-[15px] text-orange-500">{checkIconOrange} Acceso a MEGA</li>
               <li className="flex items-center gap-3 text-[15px] text-orange-500">{checkIconOrange} Soporte para Series (1 por mes)</li>
@@ -106,7 +110,7 @@ export default function MembresiaVipPage() {
           </div>
 
           {/* Plan 6 Meses */}
-          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-[#1f1f23] hover:border-gray-600 transition-colors">
+          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-border hover:border-gray-600 transition-colors">
             <h3 className="text-lg font-medium text-white mb-2">PHD VIP 6 Meses</h3>
             <div className="flex items-baseline gap-1 mb-8">
               <span className="text-5xl font-bold tracking-tight">$69</span>
@@ -119,6 +123,8 @@ export default function MembresiaVipPage() {
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Sin Publicidad (Ni PopUps)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte prioritario 24/7</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Servidores Premium</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Temas Web Exclusivos</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Color de Nombre Único</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Prioridad a pedidos (1 por mes)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Acceso a MEGA</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte para Series (1 por mes)</li>
@@ -130,7 +136,7 @@ export default function MembresiaVipPage() {
           </div>
 
           {/* Plan 12 Meses */}
-          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-[#1f1f23] hover:border-gray-600 transition-colors">
+          <div className="flex flex-col p-8 rounded-3xl bg-[#111114] border border-border hover:border-gray-600 transition-colors">
             <h3 className="text-lg font-medium text-white mb-2">PHD VIP 12 Meses</h3>
             <div className="flex items-baseline gap-1 mb-8">
               <span className="text-5xl font-bold tracking-tight">$134</span>
@@ -143,6 +149,8 @@ export default function MembresiaVipPage() {
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Sin Publicidad (Ni PopUps)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte prioritario 24/7</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Servidores Premium</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Temas Web Exclusivos</li>
+              <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Color de Nombre Único</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Prioridad a pedidos (1 por mes)</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Acceso a MEGA</li>
               <li className="flex items-center gap-3 text-[15px] text-gray-300">{checkIcon} Soporte para Series (1 por mes)</li>

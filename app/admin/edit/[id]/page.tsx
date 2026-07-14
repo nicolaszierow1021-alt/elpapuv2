@@ -73,21 +73,21 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-accent/20 border-t-accent rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
-      <div className="flex-none bg-[#121215] border-b border-[#1f1f23] px-6 py-4 flex items-center gap-4 sticky top-0 z-20">
+    <div className="min-h-screen bg-background text-white flex flex-col">
+      <div className="flex-none bg-surface border-b border-border px-6 py-4 flex items-center gap-4 sticky top-0 z-20">
         <Link href="/admin">
           <Button variant="ghost" className="px-2 text-gray-400 hover:text-white hover:bg-white/5">
             <ArrowLeft className="w-5 h-5" />
           </Button>
         </Link>
-        <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-500">
+        <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-accent">
           Editar Película
         </h1>
       </div>
@@ -97,16 +97,16 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
           {/* Left Column: Sticky Preview */}
           <div className="lg:w-[320px] shrink-0">
             <div className="sticky top-24 space-y-6">
-              <div className="aspect-[2/3] relative rounded-2xl overflow-hidden border border-[#1f1f23] shadow-2xl">
+              <div className="aspect-[2/3] relative rounded-2xl overflow-hidden border border-border shadow-2xl">
                 {formData.cover_url ? (
                   <Image src={formData.cover_url} alt="Cover Preview" fill className="object-cover" />
                 ) : (
-                  <div className="w-full h-full bg-[#121215] flex items-center justify-center text-gray-700">Sin Imagen</div>
+                  <div className="w-full h-full bg-surface flex items-center justify-center text-gray-700">Sin Imagen</div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
                   <h3 className="text-2xl font-black text-white leading-tight drop-shadow-lg">{formData.title}</h3>
-                  <p className="text-cyan-400 font-bold text-sm mt-1">{formData.release_year}</p>
+                  <p className="text-accent-hover font-bold text-sm mt-1">{formData.release_year}</p>
                 </div>
               </div>
             </div>
@@ -114,23 +114,23 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
 
           {/* Right Column: Form Fields */}
           <div className="flex-1 space-y-8">
-            <div className="bg-[#121215]/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-[#1f1f23] shadow-xl">
+            <div className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-border shadow-xl">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-2 h-6 bg-cyan-500 rounded-full inline-block"></span>
+                <span className="w-2 h-6 bg-accent rounded-full inline-block"></span>
                 Información Técnica
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Título (Editable para formatos)</label>
-                  <input name="title" value={formData.title || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                  <input name="title" value={formData.title || ''} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Título Original</label>
-                  <input name="original_title" value={formData.original_title || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                  <input name="original_title" value={formData.original_title || ''} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Resolución</label>
-                  <select name="resolution" value={formData.resolution || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                  <select name="resolution" value={formData.resolution || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                     <option value="">Selecciona una resolución</option>
                     <option value="1920x1080 (HD 1080P)">1920x1080 (HD 1080P)</option>
                     <option value="3840x2160 (4K UHD)">3840x2160 (4K UHD)</option>
@@ -142,7 +142,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Formato / Calidad</label>
-                  <select name="format" value={formData.format || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                  <select name="format" value={formData.format || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                     <option value="">Selecciona un formato</option>
                     <option value="BDRIP">BDRIP</option>
                     <option value="WEB-DL">WEB-DL</option>
@@ -157,15 +157,15 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Tamaño</label>
-                  <input name="file_size" value={formData.file_size || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                  <input name="file_size" value={formData.file_size || ''} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Contraseña</label>
-                  <input name="password" value={formData.password || ''} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                  <input name="password" value={formData.password || ''} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold tracking-wider text-violet-400 uppercase">Categoría</label>
-                  <select name="category" value={formData.category || 'Película'} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                  <select name="category" value={formData.category || 'Película'} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                     <option value="Película">Película</option>
                     <option value="SeriesTV">Series TV</option>
                     <option value="Anime">Anime</option>
@@ -173,7 +173,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                 </div>
                 <div className="space-y-3 md:col-span-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Pistas de Audio (INFORMACIÓN GENERAL)</label>
-                  <p className="text-xs text-gray-500">Cada entrada es un "Audio #N" en la ficha técnica. Ej: <span className="text-cyan-400">Latino AC3 5.1</span></p>
+                  <p className="text-xs text-gray-500">Cada entrada es un "Audio #N" en la ficha técnica. Ej: <span className="text-accent-hover">Latino AC3 5.1</span></p>
                   <div className="flex flex-col gap-2">
                     {(formData.audio_languages || ['']).map((lang: string, idx: number) => (
                       <div key={idx} className="flex items-center gap-2">
@@ -187,7 +187,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                               newArr[idx] = e.target.value ? `${e.target.value} ${codec}` : '';
                               setFormData({ ...formData, audio_languages: newArr });
                             }}
-                            className="flex-1 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                            className="flex-1 bg-black/40 border border-border focus:border-accent/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
                           >
                             <option value="">Seleccionar idioma</option>
                             <option value="Latino">Latino</option>
@@ -208,7 +208,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                               newArr[idx] = `${base} ${e.target.value}`;
                               setFormData({ ...formData, audio_languages: newArr });
                             }}
-                            className="w-36 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                            className="w-36 bg-black/40 border border-border focus:border-accent/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
                           >
                             <option value="AC3 5.1">AC3 5.1</option>
                             <option value="AC3 2.0">AC3 2.0</option>
@@ -237,7 +237,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, audio_languages: [...(formData.audio_languages || []), 'Latino AC3 5.1'] })}
-                    className="flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors mt-1 border border-cyan-500/30 hover:border-cyan-500/60 px-3 py-1.5 rounded-lg"
+                    className="flex items-center gap-1.5 text-xs font-bold text-accent-hover hover:text-accent-hover transition-colors mt-1 border border-accent/30 hover:border-accent/60 px-3 py-1.5 rounded-lg"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
                     Añadir pista de audio
@@ -253,12 +253,12 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Sinopsis</label>
-                  <textarea name="description" value={formData.description || ''} onChange={handleChange} rows={5} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none resize-none" />
+                  <textarea name="description" value={formData.description || ''} onChange={handleChange} rows={5} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none resize-none" />
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#121215]/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-[#1f1f23] shadow-xl">
+            <div className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-border shadow-xl">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-2 h-6 bg-purple-500 rounded-full inline-block"></span>
                 Enlaces de Descarga
@@ -310,7 +310,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
 
                 {/* Free Links */}
                 <div>
-                  <label className="text-xs font-bold tracking-wider text-cyan-400 uppercase flex items-center gap-2 mb-3">
+                  <label className="text-xs font-bold tracking-wider text-accent-hover uppercase flex items-center gap-2 mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     ENLACES PÚBLICOS (FREE)
                   </label>
@@ -325,7 +325,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                             setFormData({ ...formData, links_free: updated });
                           }}
                           placeholder="Servidor"
-                          className="w-28 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
+                          className="w-28 bg-accent/5 border border-accent/20 focus:border-accent/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
                         />
                         <input
                           value={link.url || ''}
@@ -335,7 +335,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                             setFormData({ ...formData, links_free: updated });
                           }}
                           placeholder="https://..."
-                          className="flex-1 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
+                          className="flex-1 bg-accent/5 border border-accent/20 focus:border-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
                         />
                         <button
                           onClick={() => {
@@ -348,7 +348,7 @@ export default function EditMoviePage({ params }: { params: Promise<{ id: string
                     ))}
                     <button
                       onClick={() => setFormData({ ...formData, links_free: [...(formData.links_free || []), { url: '', server: 'Free' }] })}
-                      className="w-full py-2.5 rounded-lg border border-dashed border-cyan-500/30 text-cyan-500/60 hover:text-cyan-500 hover:border-cyan-500/60 text-sm font-bold transition-colors"
+                      className="w-full py-2.5 rounded-lg border border-dashed border-accent/30 text-accent/60 hover:text-accent hover:border-accent/60 text-sm font-bold transition-colors"
                     >+ Añadir enlace Free</button>
                   </div>
                 </div>

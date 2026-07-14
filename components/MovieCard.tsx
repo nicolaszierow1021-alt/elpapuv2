@@ -23,7 +23,7 @@ interface MovieCardProps {
 
 const getResolutionBadge = (res?: string) => {
   const r = res?.toUpperCase() || '';
-  let color = 'bg-[#00cce6] text-black'; // Default Cyan
+  let color = 'bg-accent text-black'; // Default Cyan
   let line1 = '';
   let line2 = '';
   
@@ -79,7 +79,7 @@ export function MovieCard({ movie }: MovieCardProps) {
 
   return (
     <Link href={`/pelicula/${movie.id}`} className="group flex flex-col gap-2">
-      <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-[#121215] border border-[#1f1f23] transition-all duration-300 group-hover:border-cyan-500/50">
+      <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface border border-border transition-all duration-300 group-hover:border-accent/50">
         
         {/* Poster Image */}
         {movie.cover_url ? (
@@ -144,13 +144,13 @@ export function MovieCard({ movie }: MovieCardProps) {
             {movie.description || 'Sin sinopsis disponible.'}
           </p>
           
-          <div className="text-cyan-400 text-[11px] font-medium mt-1 flex items-center gap-1">
+          <div className="text-accent-hover text-[11px] font-medium mt-1 flex items-center gap-1">
             Ver detalles <span className="text-lg leading-none mb-0.5">→</span>
           </div>
         </div>
 
         {/* Bottom Overlay Gradient (Always visible, darkens bottom for text) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent opacity-90 z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
 
         {/* Bottom Metadata (File Info & Flags) (Always visible) */}
         <div className="absolute bottom-2 left-2 right-2 z-20 flex flex-col gap-1.5 pointer-events-none">
@@ -200,8 +200,8 @@ export function MovieCard({ movie }: MovieCardProps) {
 
       {/* Title & Subtitle */}
       <div className="mt-1 flex flex-col">
-        <h3 className="font-semibold text-sm text-gray-100 line-clamp-1 group-hover:text-cyan-400 transition-colors">
-          {movie.title} {movie.format ? `[${movie.format}]` : ''}
+        <h3 className="font-semibold text-sm text-gray-100 line-clamp-1 group-hover:text-accent-hover transition-colors">
+          {movie.title} {movie.format ? (movie.format.startsWith('[') ? movie.format : `[${movie.format}]`) : ''}
         </h3>
         <span className="text-xs text-gray-500 font-medium mt-0.5">
           {movie.release_year || 'N/A'} • Película

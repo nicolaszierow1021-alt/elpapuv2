@@ -8,7 +8,7 @@ import { ChevronDown, Download, Server, PlayCircle, User, ListPlus, HelpCircle }
 const faqs = [
   {
     category: 'Descargas y archivos',
-    icon: <Download className="w-6 h-6 text-cyan-400" />,
+    icon: <Download className="w-6 h-6 text-accent-hover" />,
     questions: [
       {
         q: '¿Cómo descargar de PAPUMOVIE?',
@@ -104,21 +104,21 @@ const faqs = [
 
 function AccordionItem({ q, a, isOpen, onClick }: { q: string, a: string, isOpen: boolean, onClick: () => void }) {
   return (
-    <div className="border border-[#1f1f23] rounded-xl overflow-hidden bg-[#121215] mb-3 transition-all duration-300 hover:border-cyan-500/30">
+    <div className="border border-border rounded-xl overflow-hidden bg-surface mb-3 transition-all duration-300 hover:border-accent/30">
       <button
         onClick={onClick}
         className="w-full flex items-center justify-between p-5 text-left bg-transparent outline-none focus:outline-none"
       >
-        <span className={`font-semibold pr-8 ${isOpen ? 'text-cyan-400' : 'text-gray-200'}`}>
+        <span className={`font-semibold pr-8 ${isOpen ? 'text-accent-hover' : 'text-gray-200'}`}>
           {q}
         </span>
-        <ChevronDown className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-cyan-400' : 'text-gray-500'}`} />
+        <ChevronDown className={`w-5 h-5 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-accent-hover' : 'text-gray-500'}`} />
       </button>
       <div
         className="transition-all duration-300 ease-in-out overflow-hidden"
         style={{ maxHeight: isOpen ? '500px' : '0', opacity: isOpen ? 1 : 0 }}
       >
-        <div className="p-5 pt-0 text-gray-400 text-sm leading-relaxed border-t border-[#1f1f23]/50 mt-2">
+        <div className="p-5 pt-0 text-gray-400 text-sm leading-relaxed border-t border-border/50 mt-2">
           {a}
         </div>
       </div>
@@ -135,18 +135,18 @@ export default function FAQPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       {/* Hero Header */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#121215] to-[#0a0a0f] border-b border-[#1f1f23] pt-16 pb-12 px-4">
+      <div className="relative overflow-hidden bg-gradient-to-b from-surface to-background border-b border-border pt-16 pb-12 px-4">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full pointer-events-none">
-          <div className="absolute inset-0 bg-cyan-500/5 blur-[120px] rounded-full" />
+          <div className="absolute inset-0 bg-accent/5 blur-[120px] rounded-full" />
         </div>
 
         <div className="relative max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#16161a] border border-[#1f1f23] mb-6 shadow-xl">
-            <HelpCircle className="w-8 h-8 text-cyan-400" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface border border-border mb-6 shadow-xl">
+            <HelpCircle className="w-8 h-8 text-accent-hover" />
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
             Centro de Ayuda
@@ -163,7 +163,7 @@ export default function FAQPage() {
           {faqs.map((section, sectionIdx) => (
             <div key={section.category} className="scroll-mt-24" id={`cat-${sectionIdx}`}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="p-2.5 bg-[#16161a] border border-[#1f1f23] rounded-lg">
+                <div className="p-2.5 bg-surface border border-border rounded-lg">
                   {section.icon}
                 </div>
                 <h2 className="text-2xl font-bold text-white">{section.category}</h2>

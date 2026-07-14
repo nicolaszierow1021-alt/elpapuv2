@@ -85,7 +85,7 @@ export default async function IdiomaPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       <div className="max-w-7xl mx-auto w-full px-4 py-10 flex-1">
@@ -109,15 +109,15 @@ export default async function IdiomaPage({
               href={buildUrl(t.key, sort)}
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
                 tipo === t.key
-                  ? 'bg-[#00d0d0] text-black'
-                  : 'text-gray-400 hover:text-white hover:bg-[#1a1a20]'
+                  ? 'bg-accent text-black'
+                  : 'text-gray-400 hover:text-white hover:bg-surface-hover'
               }`}
             >
               {t.label}
             </Link>
           ))}
 
-          <div className="w-px h-5 bg-[#1f1f23] mx-1" />
+          <div className="w-px h-5 bg-border mx-1" />
 
           {/* Sort */}
           {[
@@ -130,7 +130,7 @@ export default async function IdiomaPage({
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
                 sort === s.key
                   ? 'bg-white/10 text-white border border-white/20'
-                  : 'text-gray-400 hover:text-white hover:bg-[#1a1a20]'
+                  : 'text-gray-400 hover:text-white hover:bg-surface-hover'
               }`}
             >
               {s.label}
@@ -145,8 +145,8 @@ export default async function IdiomaPage({
                 href={`/idioma/${code}${tipo ? `?tipo=${tipo}` : ''}`}
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-colors ${
                   code === lang
-                    ? 'bg-[#00d0d0]/10 border-[#00d0d0]/40 text-[#00d0d0]'
-                    : 'border-[#1f1f23] text-gray-400 hover:text-white hover:border-[#00d0d0]/30'
+                    ? 'bg-accent/10 border-[#00d0d0]/40 text-accent'
+                    : 'border-border text-gray-400 hover:text-white hover:border-[#00d0d0]/30'
                 }`}
               >
                 <span className={`fi ${info.flagClass} rounded-sm w-3.5 h-2.5 overflow-hidden`} />

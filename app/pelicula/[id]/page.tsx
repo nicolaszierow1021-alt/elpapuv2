@@ -9,6 +9,7 @@ import { Footer } from '@/components/Footer';
 import { AdBanner } from '@/components/AdBanner';
 import { MovieCard } from '@/components/MovieCard';
 import { CommentsSection } from '@/components/CommentsSection';
+import { MovieActions } from '@/components/MovieActions';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -98,7 +99,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
 
   const { data: comments } = await supabase
     .from('comments')
-    .select('*, profiles(username, role)')
+    .select('*, profiles(username, role, avatar_url, name_color)')
     .eq('movie_id', id)
     .order('created_at', { ascending: false });
 
@@ -193,7 +194,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
               {/* Data */}
               <div className="flex-1 min-w-0">
                 <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-primary leading-tight">
-                  {movie.title} {movie.format && `[${movie.format}]`} <span className="text-text-secondary font-normal ml-2 opacity-60">({movie.release_year})</span>
+                  {movie.title} {movie.format && (movie.format.startsWith('[') ? movie.format : `[${movie.format}]`)} <span className="text-text-secondary font-normal ml-2 opacity-60">({movie.release_year})</span>
                 </h2>
                 
                 {movie.original_title && (
@@ -203,7 +204,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 mt-3">
                   <span className="px-1.5 py-0.5 text-[10px] uppercase tracking-wider border border-teal-500/30 rounded bg-teal-300/10 text-teal-400 font-bold">Película</span>
                   {movie.rating && (
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-sm font-medium bg-[#121215] text-[#00d0d0] border border-[#1f1f23]">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-sm font-medium bg-surface text-accent border border-border">
                       <svg xmlns="http://www.w3.org/2000/svg" className="size-4 fill-current" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                       <span className="font-bold text-[15px] leading-none">{movie.rating.toFixed(1)}</span>
                       <span className="text-[11px] font-bold uppercase tracking-wider ml-0.5">TMDB</span>
@@ -278,36 +279,7 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
                   <p className="text-[13px] text-text-secondary leading-relaxed line-clamp-3 sm:line-clamp-6">{movie.description}</p>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-6">
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg> 
-                    Añadir a mi lista
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg> 
-                    Añadir a favoritos
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                    IMDb
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                    TMDB
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5c-2.2 0-4 1.8-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    921
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/></svg>
-                    Compartir
-                  </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-lg border border-border bg-surface hover:bg-surface-hover text-text-secondary transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                    Legal
-                  </button>
-                </div>
+                <MovieActions movie={movie} />
 
               </div>
             </div>
@@ -354,31 +326,31 @@ export default async function MoviePage({ params }: { params: Promise<{ id: stri
               <details className="border border-border rounded-xl bg-background overflow-hidden mt-6 group" open>
                 <summary className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border cursor-pointer list-none [&::-webkit-details-marker]:hidden outline-none">
                   <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-text-secondary uppercase tracking-widest">
-                    <span className="text-[#00d0d0] text-sm leading-none">{'{ }'}</span> INFORMACIÓN GENERAL LATINO
+                    <span className="text-accent text-sm leading-none">{'{ }'}</span> INFORMACIÓN GENERAL LATINO
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" className="size-4 text-text-secondary/50 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                 </summary>
                 
-                <div className="p-4 md:p-5 text-xs font-mono text-gray-300 space-y-1.5 bg-[#0a0a0f]">
-                  <div><span className="text-[#00d0d0] font-semibold">Titulo Original:</span> {movie.original_title || movie.title}</div>
-                  <div><span className="text-[#00d0d0] font-semibold">Resolución:</span> {movie.resolution}</div>
-                  <div><span className="text-[#00d0d0] font-semibold">Formato:</span> {movie.format}</div>
+                <div className="p-4 md:p-5 text-xs font-mono text-gray-300 space-y-1.5 bg-background">
+                  <div><span className="text-accent font-semibold">Titulo Original:</span> {movie.original_title || movie.title}</div>
+                  <div><span className="text-accent font-semibold">Resolución:</span> {movie.resolution}</div>
+                  <div><span className="text-accent font-semibold">Formato:</span> {movie.format}</div>
                   <div>
                     {movie.audio_languages && movie.audio_languages.length > 0 ? (
                       movie.audio_languages.filter((l: string) => l.trim()).map((lang: string, idx: number) => (
                         <span key={lang}>
                           {idx > 0 && <span className="text-white/30 mx-1">|</span>}
-                          <span className="text-[#00d0d0] font-semibold">Audio #{idx + 1}:</span> {lang}
+                          <span className="text-accent font-semibold">Audio #{idx + 1}:</span> {lang}
                         </span>
                       ))
                     ) : (
-                      <><span className="text-[#00d0d0] font-semibold">Audio #1:</span> Latino AC3 5.1</>
+                      <><span className="text-accent font-semibold">Audio #1:</span> Latino AC3 5.1</>
                     )}
                   </div>
-                  <div><span className="text-[#00d0d0] font-semibold">Subtítulos:</span> {movie.subtitles?.join(', ') || 'Español, Inglés'}</div>
-                  <div><span className="text-[#00d0d0] font-semibold">Duración:</span> {movie.duration_minutes} Min.</div>
-                  <div><span className="text-[#00d0d0] font-semibold">Tamaño del Archivo:</span> {movie.file_size}</div>
-                  <div><span className="text-[#00d0d0] font-semibold">Contraseña:</span> {movie.password || 'papumoviemkv.store'}</div>
+                  <div><span className="text-accent font-semibold">Subtítulos:</span> {movie.subtitles?.join(', ') || 'Español, Inglés'}</div>
+                  <div><span className="text-accent font-semibold">Duración:</span> {movie.duration_minutes} Min.</div>
+                  <div><span className="text-accent font-semibold">Tamaño del Archivo:</span> {movie.file_size}</div>
+                  <div><span className="text-accent font-semibold">Contraseña:</span> {movie.password || 'papumoviemkv.store'}</div>
                 </div>
               </details>
             </div>

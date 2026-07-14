@@ -57,14 +57,14 @@ export default async function BuscarPage({
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       <div className="max-w-7xl mx-auto w-full px-4 py-8 flex-1 flex flex-col">
         
         {!query && (
            <form action="/buscar" method="get" className="max-w-2xl mx-auto my-12 w-full">
-            <div className="relative flex bg-[#121215] rounded-2xl border border-[#1f1f23] overflow-hidden shadow-xl focus-within:border-[#00d0d0]/50 focus-within:ring-2 focus-within:ring-[#00d0d0]/20 transition-all">
+            <div className="relative flex bg-surface rounded-2xl border border-border overflow-hidden shadow-xl focus-within:border-[#00d0d0]/50 focus-within:ring-2 focus-within:ring-[#00d0d0]/20 transition-all">
               <Search className="absolute top-1/2 -translate-y-1/2 left-5 w-5 h-5 text-gray-500" />
               <input
                 type="text"
@@ -73,7 +73,7 @@ export default async function BuscarPage({
                 autoFocus
                 className="flex-1 bg-transparent pl-13 pr-4 py-4 text-white placeholder:text-gray-600 outline-none text-base"
               />
-              <button type="submit" className="px-8 py-4 bg-[#00d0d0] hover:bg-[#00d0d0]/90 text-black font-bold transition-colors">
+              <button type="submit" className="px-8 py-4 bg-accent hover:bg-accent/90 text-black font-bold transition-colors">
                 Buscar
               </button>
             </div>
@@ -82,7 +82,7 @@ export default async function BuscarPage({
 
         {query && (
           <>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-[#1f1f23] pb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-border pb-6">
               
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center shrink-0">
@@ -99,37 +99,37 @@ export default async function BuscarPage({
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex bg-[#121215] border border-[#1f1f23] p-1 rounded-lg gap-1">
+                <div className="flex bg-surface border border-border p-1 rounded-lg gap-1">
                   <Link href={buildUrl({ tipo: undefined })} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${!tipo ? 'bg-rose-500/20 text-rose-400' : 'text-gray-400 hover:text-white'}`}>Todo</Link>
                   <Link href={buildUrl({ tipo: 'peliculas' })} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${tipo === 'peliculas' ? 'bg-rose-500/20 text-rose-400' : 'text-gray-400 hover:text-white'}`}>Películas</Link>
                   <Link href={buildUrl({ tipo: 'series' })} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${tipo === 'series' ? 'bg-rose-500/20 text-rose-400' : 'text-gray-400 hover:text-white'}`}>Series</Link>
                 </div>
 
                 <div className="relative group z-30">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-[#121215] border border-[#1f1f23] rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:border-gray-700 transition-colors">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-surface border border-border rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:border-gray-700 transition-colors">
                     {genre || 'Todos los Géneros'}
                     <ChevronDown className="w-3 h-3 text-gray-500" />
                   </button>
                   <div className="absolute top-full right-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
-                    <div className="bg-[#121215] border border-[#1f1f23] rounded-lg shadow-xl py-2 max-h-64 overflow-y-auto">
-                      <Link href={buildUrl({ genre: undefined })} className="block px-4 py-2 text-xs text-gray-300 hover:text-white hover:bg-[#1a1a20]">Todos los Géneros</Link>
+                    <div className="bg-surface border border-border rounded-lg shadow-xl py-2 max-h-64 overflow-y-auto">
+                      <Link href={buildUrl({ genre: undefined })} className="block px-4 py-2 text-xs text-gray-300 hover:text-white hover:bg-surface-hover">Todos los Géneros</Link>
                       {allGenres.map(g => (
-                        <Link key={g} href={buildUrl({ genre: g })} className={`block px-4 py-2 text-xs hover:bg-[#1a1a20] ${genre === g ? 'text-[#00d0d0]' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
+                        <Link key={g} href={buildUrl({ genre: g })} className={`block px-4 py-2 text-xs hover:bg-surface-hover ${genre === g ? 'text-accent' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
                       ))}
                     </div>
                   </div>
                 </div>
 
                 <div className="relative group z-30">
-                  <button className="flex items-center gap-2 px-4 py-2 bg-[#121215] border border-[#1f1f23] rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:border-gray-700 transition-colors">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-surface border border-border rounded-lg text-xs font-medium text-gray-400 hover:text-white hover:border-gray-700 transition-colors">
                     {year || 'Cualquier Año'}
                     <ChevronDown className="w-3 h-3 text-gray-500" />
                   </button>
                   <div className="absolute top-full right-0 pt-2 w-36 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
-                    <div className="bg-[#121215] border border-[#1f1f23] rounded-lg shadow-xl py-2 max-h-64 overflow-y-auto">
-                      <Link href={buildUrl({ year: undefined })} className="block px-4 py-2 text-xs text-gray-300 hover:text-white hover:bg-[#1a1a20]">Cualquier Año</Link>
+                    <div className="bg-surface border border-border rounded-lg shadow-xl py-2 max-h-64 overflow-y-auto">
+                      <Link href={buildUrl({ year: undefined })} className="block px-4 py-2 text-xs text-gray-300 hover:text-white hover:bg-surface-hover">Cualquier Año</Link>
                       {years.map(y => (
-                        <Link key={y} href={buildUrl({ year: String(y) })} className={`block px-4 py-2 text-xs hover:bg-[#1a1a20] ${year === String(y) ? 'text-[#00d0d0]' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
+                        <Link key={y} href={buildUrl({ year: String(y) })} className={`block px-4 py-2 text-xs hover:bg-surface-hover ${year === String(y) ? 'text-accent' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
                       ))}
                     </div>
                   </div>
@@ -148,14 +148,14 @@ export default async function BuscarPage({
                   const isSeries = movie.category === 'SeriesTV';
                   
                   return (
-                    <Link key={movie.id} href={`/pelicula/${movie.id}`} className="group flex flex-col sm:flex-row bg-[#101014] border border-[#1f1f23] rounded-lg overflow-hidden hover:border-[#00d0d0]/40 transition-all">
+                    <Link key={movie.id} href={`/pelicula/${movie.id}`} className="group flex flex-col sm:flex-row bg-[#101014] border border-border rounded-lg overflow-hidden hover:border-[#00d0d0]/40 transition-all">
                       
                       {/* Image - Smaller */}
                       <div className="relative w-full sm:w-[90px] shrink-0 aspect-[2/3] sm:aspect-auto sm:h-[135px]">
                         {movie.cover_url ? (
                           <img src={movie.cover_url} alt={movie.title} className="w-full h-full object-cover" />
                         ) : (
-                          <div className="w-full h-full bg-[#1a1a20] flex items-center justify-center">
+                          <div className="w-full h-full bg-surface-hover flex items-center justify-center">
                             <Search className="w-6 h-6 text-gray-700" />
                           </div>
                         )}
@@ -171,7 +171,7 @@ export default async function BuscarPage({
                       <div className="flex-1 p-3.5 flex flex-col relative justify-center">
                         <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5">
                           {movie.resolution && (
-                            <span className="bg-[#00cce6] text-black text-[8px] font-black px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
+                            <span className="bg-accent text-black text-[8px] font-black px-1.5 py-0.5 rounded-sm uppercase tracking-wider">
                               {movie.resolution.split(' ')[0]}
                             </span>
                           )}
@@ -183,7 +183,7 @@ export default async function BuscarPage({
                         </div>
 
                         <div className="pr-20 mb-2">
-                          <h2 className="text-base font-bold text-white group-hover:text-[#00d0d0] transition-colors leading-tight mb-0.5">
+                          <h2 className="text-base font-bold text-white group-hover:text-accent transition-colors leading-tight mb-0.5">
                             {movie.title} {movie.format && !movie.title.includes(movie.format) ? `[${movie.format}]` : ''} {movie.release_year && !movie.title.includes(String(movie.release_year)) ? movie.release_year : ''}
                           </h2>
                           {movie.original_title && movie.original_title !== movie.title && (

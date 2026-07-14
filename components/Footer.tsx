@@ -4,7 +4,7 @@ import { Globe, Mail, MessageSquare, Share2 } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#1f1f23] bg-transparent mt-auto">
+    <footer className="border-t border-border bg-transparent mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[13px] text-gray-400">
           <p>© {new Date().getFullYear()} PAPUMOVIE. Todos los derechos reservados.</p>

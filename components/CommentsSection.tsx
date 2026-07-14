@@ -7,6 +7,9 @@ import { addComment, deleteComment } from '@/app/actions/comments';
 interface Profile {
   username?: string;
   role?: string;
+  avatar_url?: string;
+  name_color?: string;
+  vip_until?: string;
 }
 
 interface Comment {
@@ -116,13 +119,20 @@ export function CommentsSection({ movieId, comments, session }: CommentsSectionP
             ) : (
               comments.map((comment) => (
                 <div key={comment.id} className="flex gap-3 bg-background border border-border rounded-lg p-4">
-                  <div className="shrink-0 size-8 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-bold uppercase text-accent">
-                    {comment.profiles?.username?.charAt(0) || 'U'}
+                  <div className="shrink-0 size-8 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-bold uppercase text-accent overflow-hidden">
+                    {comment.profiles?.avatar_url ? (
+                      <img src={comment.profiles.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      comment.profiles?.username?.charAt(0) || 'U'
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2 mb-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-sm truncate text-text-primary">
+                        <span 
+                          className="font-bold text-sm truncate"
+                          style={{ color: comment.profiles?.name_color || 'var(--text-primary)' }}
+                        >
                           {comment.profiles?.username || 'Usuario'}
                         </span>
                         {comment.profiles?.role === 'admin' && (

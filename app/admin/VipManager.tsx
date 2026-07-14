@@ -70,10 +70,10 @@ export function VipManager() {
   };
 
   return (
-    <div className="bg-[#0a0a0f] border border-[#1f1f23] rounded-2xl relative overflow-hidden group shadow-xl">
+    <div className="bg-background border border-border rounded-2xl relative overflow-hidden group shadow-xl">
       <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 blur-[50px] rounded-full pointer-events-none transition-colors duration-500" />
       
-      <div className="p-5 border-b border-[#1f1f23] flex items-center justify-between relative z-10 bg-[#0d0d12]">
+      <div className="p-5 border-b border-border flex items-center justify-between relative z-10 bg-[#0d0d12]">
         <div className="flex items-center gap-3">
           <div className="p-1.5 bg-gradient-to-tr from-yellow-600 to-yellow-400 rounded-md shadow-[0_0_15px_rgba(234,179,8,0.2)]">
             <Crown className="w-4 h-4 text-white" />
@@ -82,8 +82,8 @@ export function VipManager() {
             <h2 className="text-sm font-bold text-white tracking-tight">Gestión VIP</h2>
           </div>
         </div>
-        <button onClick={fetchVipUsers} className="p-1.5 hover:bg-[#1a1a20] rounded-md transition-colors text-gray-400 hover:text-white" title="Actualizar lista">
-          <RefreshCw className={`w-3.5 h-3.5 ${loadingUsers ? 'animate-spin text-cyan-400' : ''}`} />
+        <button onClick={fetchVipUsers} className="p-1.5 hover:bg-surface-hover rounded-md transition-colors text-gray-400 hover:text-white" title="Actualizar lista">
+          <RefreshCw className={`w-3.5 h-3.5 ${loadingUsers ? 'animate-spin text-accent-hover' : ''}`} />
         </button>
       </div>
 
@@ -99,7 +99,7 @@ export function VipManager() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="usuario@ejemplo.com"
-              className="w-full bg-[#121215] border border-[#1f1f23] focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-3 py-2 text-sm text-white transition-all outline-none"
+              className="w-full bg-surface border border-border focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-3 py-2 text-sm text-white transition-all outline-none"
               required
               disabled={status === 'granting' || status === 'revoking'}
             />
@@ -112,7 +112,7 @@ export function VipManager() {
               <select
                 value={duration}
                 onChange={(e) => setDuration(e.target.value)}
-                className="w-full bg-[#121215] border border-[#1f1f23] focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-3 py-2 text-sm text-white transition-all outline-none appearance-none"
+                className="w-full bg-surface border border-border focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50 rounded-lg px-3 py-2 text-sm text-white transition-all outline-none appearance-none"
                 disabled={status === 'granting' || status === 'revoking'}
               >
                 <option value="1">1 Mes</option>
@@ -164,10 +164,10 @@ export function VipManager() {
         </form>
 
         {/* VIP Users Minimal List */}
-        <div className="relative z-10 border-t border-[#1f1f23] pt-4">
+        <div className="relative z-10 border-t border-border pt-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Activos Recientes</h3>
-            <span className="text-[10px] bg-[#1a1a20] px-1.5 py-0.5 rounded text-gray-300 font-mono">{vipUsers.length}</span>
+            <span className="text-[10px] bg-surface-hover px-1.5 py-0.5 rounded text-gray-300 font-mono">{vipUsers.length}</span>
           </div>
           
           {loadingUsers ? (
@@ -175,7 +175,7 @@ export function VipManager() {
               <Loader2 className="w-4 h-4 animate-spin text-yellow-500" />
             </div>
           ) : vipUsers.length === 0 ? (
-            <div className="text-center p-4 bg-[#121215] border border-[#1f1f23] rounded-lg text-gray-500 text-xs">
+            <div className="text-center p-4 bg-surface border border-border rounded-lg text-gray-500 text-xs">
               Sin usuarios VIP.
             </div>
           ) : (
@@ -185,9 +185,9 @@ export function VipManager() {
                 const isAdmin = u.role === 'admin';
                 
                 return (
-                  <div key={u.id} className="flex items-center justify-between p-2.5 bg-[#121215] hover:bg-[#16161a] border border-[#1f1f23] rounded-lg transition-colors group">
+                  <div key={u.id} className="flex items-center justify-between p-2.5 bg-surface hover:bg-surface border border-border rounded-lg transition-colors group">
                     <div className="flex items-center gap-2.5 overflow-hidden">
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${isAdmin ? 'bg-cyan-500/20 text-cyan-400' : 'bg-yellow-500/20 text-yellow-500'}`}>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${isAdmin ? 'bg-accent/20 text-accent-hover' : 'bg-yellow-500/20 text-yellow-500'}`}>
                         {isAdmin ? <Activity className="w-3 h-3" /> : <Crown className="w-3 h-3" />}
                       </div>
                       <div className="truncate">
@@ -198,7 +198,7 @@ export function VipManager() {
                     
                     <div className="flex items-center gap-2 shrink-0">
                       <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                        isAdmin ? 'text-cyan-400' : remaining === 'Expirado' ? 'text-red-400 bg-red-400/10' : 'text-emerald-400 bg-emerald-400/10'
+                        isAdmin ? 'text-accent-hover' : remaining === 'Expirado' ? 'text-red-400 bg-red-400/10' : 'text-emerald-400 bg-emerald-400/10'
                       }`}>
                         {remaining}
                       </span>

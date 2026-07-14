@@ -59,7 +59,7 @@ export default async function SeriesPage({
   ).sort((a, b) => b - a);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-white flex flex-col">
       <Header />
 
       {/* Hero Banner */}
@@ -72,8 +72,8 @@ export default async function SeriesPage({
               alt={featured.title}
               className="w-full h-full object-cover object-top"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f] via-[#0a0a0f]/70 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           </div>
 
           {/* Arrow indicators */}
@@ -163,7 +163,7 @@ export default async function SeriesPage({
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
                 sort === tab.key
                   ? 'bg-violet-600 text-white'
-                  : 'text-gray-400 hover:text-white hover:bg-[#1a1a20]'
+                  : 'text-gray-400 hover:text-white hover:bg-surface-hover'
               }`}
             >
               {tab.label}
@@ -172,15 +172,15 @@ export default async function SeriesPage({
 
           {/* Genre dropdown */}
           <div className="relative group ml-1">
-            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-[#1f1f23] hover:border-violet-500/50 bg-[#121215] transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-border hover:border-violet-500/50 bg-surface transition-colors">
               {genre || 'Todos los Géneros'}
               <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div className="absolute top-full left-0 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-20">
-              <div className="bg-[#121215] border border-[#1f1f23] rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
-                <Link href={`/series?sort=${sort}${year ? `&year=${year}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-[#1a1a20]">Todos los Géneros</Link>
+              <div className="bg-surface border border-border rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
+                <Link href={`/series?sort=${sort}${year ? `&year=${year}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-surface-hover">Todos los Géneros</Link>
                 {allGenres.map(g => (
-                  <Link key={g} href={`/series?sort=${sort}&genre=${encodeURIComponent(g)}${year ? `&year=${year}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-[#1a1a20] ${genre === g ? 'text-violet-400' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
+                  <Link key={g} href={`/series?sort=${sort}&genre=${encodeURIComponent(g)}${year ? `&year=${year}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-surface-hover ${genre === g ? 'text-violet-400' : 'text-gray-300 hover:text-white'}`}>{g}</Link>
                 ))}
               </div>
             </div>
@@ -188,15 +188,15 @@ export default async function SeriesPage({
 
           {/* Year dropdown */}
           <div className="relative group">
-            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-[#1f1f23] hover:border-violet-500/50 bg-[#121215] transition-colors">
+            <button className="flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm text-gray-300 hover:text-white border border-border hover:border-violet-500/50 bg-surface transition-colors">
               {year || 'Cualquier Año'}
               <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div className="absolute top-full left-0 pt-2 w-36 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-20">
-              <div className="bg-[#121215] border border-[#1f1f23] rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
-                <Link href={`/series?sort=${sort}${genre ? `&genre=${genre}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-[#1a1a20]">Cualquier Año</Link>
+              <div className="bg-surface border border-border rounded-xl shadow-2xl py-2 max-h-64 overflow-y-auto">
+                <Link href={`/series?sort=${sort}${genre ? `&genre=${genre}` : ''}`} className="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-surface-hover">Cualquier Año</Link>
                 {years.map(y => (
-                  <Link key={y} href={`/series?sort=${sort}&year=${y}${genre ? `&genre=${genre}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-[#1a1a20] ${year === String(y) ? 'text-violet-400' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
+                  <Link key={y} href={`/series?sort=${sort}&year=${y}${genre ? `&genre=${genre}` : ''}`} className={`block px-4 py-2 text-sm hover:bg-surface-hover ${year === String(y) ? 'text-violet-400' : 'text-gray-300 hover:text-white'}`}>{y}</Link>
                 ))}
               </div>
             </div>
@@ -228,7 +228,7 @@ export default async function SeriesPage({
 function SeriesCard({ series }: { series: any }) {
   return (
     <Link href={`/pelicula/${series.id}`} className="group flex flex-col gap-2">
-      <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-[#121215] border border-[#1f1f23] transition-all duration-300 group-hover:border-violet-500/50">
+      <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-surface border border-border transition-all duration-300 group-hover:border-violet-500/50">
         {series.cover_url ? (
           <img src={series.cover_url} alt={series.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
         ) : (
@@ -266,7 +266,7 @@ function SeriesCard({ series }: { series: any }) {
         </div>
 
         {/* Bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent opacity-90 z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-90 z-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-300" />
 
         {/* Audio flags bottom */}
         {series.audio_languages?.length > 0 && (

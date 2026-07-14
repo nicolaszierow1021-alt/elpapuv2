@@ -59,6 +59,8 @@ export const metadata: Metadata = {
 
 import { GlobalAds } from "@/components/GlobalAds";
 import { AuthProvider } from "@/components/AuthProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import NextTopLoader from 'nextjs-toploader';
 
 export default function RootLayout({
   children,
@@ -104,13 +106,26 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} antialiased h-full`}>
       <body className="min-h-full flex flex-col bg-background text-text-primary font-sans">
+        <NextTopLoader
+          color="var(--accent)"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #00cce6,0 0 5px #00cce6"
+        />
         <AuthProvider serverSession={null} serverProfile={null}>
-          <GlobalAds />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-          {children}
+          <ThemeProvider>
+            <GlobalAds />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            {children}
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

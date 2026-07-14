@@ -25,14 +25,14 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md relative">
-        <div className="absolute inset-0 bg-cyan-500/10 blur-[80px] rounded-full" />
+        <div className="absolute inset-0 bg-accent/10 blur-[80px] rounded-full" />
         
-        <div className="bg-[#121215]/80 backdrop-blur-xl border border-[#1f1f23] rounded-2xl p-8 relative shadow-2xl">
+        <div className="bg-surface/80 backdrop-blur-xl border border-border rounded-2xl p-8 relative shadow-2xl">
           <div className="flex justify-center mb-8">
-            <div className="w-16 h-16 bg-[#16161a] border border-[#1f1f23] rounded-2xl flex items-center justify-center shadow-inner">
-              <LogIn className="w-8 h-8 text-cyan-500" />
+            <div className="w-16 h-16 bg-surface border border-border rounded-2xl flex items-center justify-center shadow-inner">
+              <LogIn className="w-8 h-8 text-accent" />
             </div>
           </div>
           
@@ -49,7 +49,7 @@ export default function LoginPage() {
                   name="identifier"
                   required
                   placeholder="tu_usuario o correo@ejemplo.com"
-                  className="w-full bg-[#0a0a0f] border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
+                  className="w-full bg-background border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
                 />
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function LoginPage() {
                   name="password"
                   required
                   placeholder="••••••••"
-                  className="w-full bg-[#0a0a0f] border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
+                  className="w-full bg-background border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function LoginPage() {
             <Button 
               type="submit" 
               disabled={loading}
-              className="w-full bg-[#00d0d0] hover:bg-[#00b0b0] text-black font-bold py-3 mt-4 shadow-[0_0_15px_rgba(0,208,208,0.3)] transition-all"
+              className="w-full bg-accent hover:bg-[#00b0b0] text-black font-bold py-3 mt-4 shadow-[0_0_15px_rgba(0,208,208,0.3)] transition-all"
             >
               {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
             </Button>
@@ -85,7 +85,7 @@ export default function LoginPage() {
           
           <div className="mt-6 text-center text-sm text-gray-400">
             ¿No tienes cuenta?{' '}
-            <Link href="/registro" className="text-cyan-500 hover:text-cyan-400 font-bold transition-colors">
+            <Link href="/registro" className="text-accent hover:text-accent-hover font-bold transition-colors">
               Regístrate aquí
             </Link>
           </div>

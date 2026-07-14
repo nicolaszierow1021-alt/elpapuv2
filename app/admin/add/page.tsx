@@ -168,14 +168,14 @@ export default function AddMoviePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white flex flex-col">
-      <div className="flex-none bg-[#121215] border-b border-[#1f1f23] px-6 py-4 flex items-center gap-4 sticky top-0 z-20">
+    <div className="min-h-screen bg-background text-white flex flex-col">
+      <div className="flex-none bg-surface border-b border-border px-6 py-4 flex items-center gap-4 sticky top-0 z-20">
         <Link href="/admin">
           <Button variant="ghost" className="px-2 text-gray-400 hover:text-white hover:bg-white/5">
             <ArrowLeft className="w-5 h-5" />
           </Button>
         </Link>
-        <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
+        <h1 className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-accent-hover to-blue-500">
           Añadir Nueva Película
         </h1>
       </div>
@@ -184,19 +184,19 @@ export default function AddMoviePage() {
         {!selectedMovie ? (
           <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 pt-12">
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-500/10 mb-6 shadow-[0_0_30px_rgba(0,208,208,0.2)]">
-                <Search className="w-8 h-8 text-cyan-400" />
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-6 shadow-[0_0_30px_rgba(0,208,208,0.2)]">
+                <Search className="w-8 h-8 text-accent-hover" />
               </div>
               <h2 className="text-3xl font-bold mb-3">Buscar en TMDB</h2>
               <p className="text-gray-400">Obtén todos los metadatos automáticamente desde The Movie Database.</p>
             </div>
 
             {/* Tabs */}
-            <div className="flex bg-[#121215] border border-[#1f1f23] rounded-xl p-1 w-max mx-auto mb-8">
+            <div className="flex bg-surface border border-border rounded-xl p-1 w-max mx-auto mb-8">
               <button
                 onClick={() => setSearchMode('name')}
                 className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
-                  searchMode === 'name' ? 'bg-cyan-500 text-black shadow-lg' : 'text-gray-400 hover:text-white'
+                  searchMode === 'name' ? 'bg-accent text-black shadow-lg' : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Buscar por Nombre
@@ -204,7 +204,7 @@ export default function AddMoviePage() {
               <button
                 onClick={() => setSearchMode('url')}
                 className={`px-6 py-2 rounded-lg text-sm font-bold transition-all ${
-                  searchMode === 'url' ? 'bg-cyan-500 text-black shadow-lg' : 'text-gray-400 hover:text-white'
+                  searchMode === 'url' ? 'bg-accent text-black shadow-lg' : 'text-gray-400 hover:text-white'
                 }`}
               >
                 Buscar por URL
@@ -212,8 +212,8 @@ export default function AddMoviePage() {
             </div>
 
             <form onSubmit={searchTMDB} className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-              <div className="relative flex bg-[#121215] rounded-xl border border-[#1f1f23] overflow-hidden shadow-2xl">
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent to-blue-500 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+              <div className="relative flex bg-surface rounded-xl border border-border overflow-hidden shadow-2xl">
                 {searchMode === 'name' ? (
                   <input 
                     type="text" 
@@ -231,7 +231,7 @@ export default function AddMoviePage() {
                     className="flex-1 bg-transparent px-6 py-4 text-lg text-white outline-none placeholder:text-gray-600"
                   />
                 )}
-                <button type="submit" disabled={loadingSearch} className="px-8 bg-cyan-500 hover:bg-cyan-400 text-black font-bold flex items-center transition-colors">
+                <button type="submit" disabled={loadingSearch} className="px-8 bg-accent hover:bg-accent-hover text-black font-bold flex items-center transition-colors">
                   {loadingSearch ? 'Buscando...' : 'Buscar'}
                 </button>
               </div>
@@ -241,7 +241,7 @@ export default function AddMoviePage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-12 animate-in fade-in">
                 {searchResults.map((result) => (
                   <div key={result.id} className="group cursor-pointer" onClick={() => selectMovie(result.id, result.media_type)}>
-                    <div className="aspect-[2/3] relative rounded-xl overflow-hidden mb-3 bg-[#121215] border border-[#1f1f23] group-hover:border-cyan-500/50 transition-all duration-300 shadow-lg">
+                    <div className="aspect-[2/3] relative rounded-xl overflow-hidden mb-3 bg-surface border border-border group-hover:border-accent/50 transition-all duration-300 shadow-lg">
                       {result.poster_path ? (
                         <Image src={`https://image.tmdb.org/t/p/w342${result.poster_path}`} alt={result.title || result.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                       ) : (
@@ -250,16 +250,16 @@ export default function AddMoviePage() {
                       
                       {/* Badge Película o Serie */}
                       <div className="absolute top-2 left-2 z-20">
-                        <span className={`px-1.5 py-0.5 text-[9px] font-bold uppercase rounded ${result.media_type === 'tv' ? 'bg-violet-600 text-white' : 'bg-[#00d0d0] text-black'}`}>
+                        <span className={`px-1.5 py-0.5 text-[9px] font-bold uppercase rounded ${result.media_type === 'tv' ? 'bg-violet-600 text-white' : 'bg-accent text-black'}`}>
                           {result.media_type === 'tv' ? 'Serie TV' : 'Película'}
                         </span>
                       </div>
 
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm z-30">
-                        <span className="bg-cyan-500 text-black text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,208,208,0.5)]">Seleccionar</span>
+                        <span className="bg-accent text-black text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(0,208,208,0.5)]">Seleccionar</span>
                       </div>
                     </div>
-                    <h3 className="text-sm font-bold text-gray-200 line-clamp-1 group-hover:text-cyan-400 transition-colors">{result.title || result.name}</h3>
+                    <h3 className="text-sm font-bold text-gray-200 line-clamp-1 group-hover:text-accent-hover transition-colors">{result.title || result.name}</h3>
                     <p className="text-[11px] text-gray-500">{(result.release_date || result.first_air_date)?.split('-')[0] || 'Desconocido'}</p>
                   </div>
                 ))}
@@ -271,16 +271,16 @@ export default function AddMoviePage() {
             {/* Left Column: Sticky Preview */}
             <div className="lg:w-[320px] shrink-0">
               <div className="sticky top-24 space-y-6">
-                <div className="aspect-[2/3] relative rounded-2xl overflow-hidden border border-[#1f1f23] shadow-2xl">
+                <div className="aspect-[2/3] relative rounded-2xl overflow-hidden border border-border shadow-2xl">
                   {formData.cover_url ? (
                     <Image src={formData.cover_url} alt="Cover Preview" fill className="object-cover" />
                   ) : (
-                    <div className="w-full h-full bg-[#121215] flex items-center justify-center text-gray-700">Sin Imagen</div>
+                    <div className="w-full h-full bg-surface flex items-center justify-center text-gray-700">Sin Imagen</div>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 pointer-events-none">
                     <h3 className="text-2xl font-black text-white leading-tight drop-shadow-lg">{formData.title}</h3>
-                    <p className="text-cyan-400 font-bold text-sm mt-1">{formData.release_year}</p>
+                    <p className="text-accent-hover font-bold text-sm mt-1">{formData.release_year}</p>
                   </div>
                 </div>
                 
@@ -292,9 +292,9 @@ export default function AddMoviePage() {
 
             {/* Right Column: Form Fields */}
             <div className="flex-1 space-y-8">
-              <div className="bg-[#121215]/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-[#1f1f23] shadow-xl">
+              <div className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-border shadow-xl">
                 <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <span className="w-2 h-6 bg-cyan-500 rounded-full inline-block"></span>
+                  <span className="w-2 h-6 bg-accent rounded-full inline-block"></span>
                   Información Técnica
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -309,8 +309,8 @@ export default function AddMoviePage() {
                             onClick={() => toggleAudioLanguage(lang.name)}
                             className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                               isSelected 
-                                ? 'bg-cyan-500/10 border-cyan-500/50 text-cyan-400' 
-                                : 'bg-[#121215] border-[#1f1f23] text-gray-400 hover:border-gray-500 hover:text-gray-200'
+                                ? 'bg-accent/10 border-accent/50 text-accent-hover' 
+                                : 'bg-surface border-border text-gray-400 hover:border-gray-500 hover:text-gray-200'
                             }`}
                           >
                             <span className={`fi ${lang.flag} rounded-sm w-4 h-3 overflow-hidden shrink-0`}></span>
@@ -325,15 +325,15 @@ export default function AddMoviePage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Título (Editable para formatos)</label>
-                    <input name="title" value={formData.title} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                    <input name="title" value={formData.title} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Título Original</label>
-                    <input name="original_title" value={formData.original_title} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                    <input name="original_title" value={formData.original_title} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Resolución</label>
-                    <select name="resolution" value={formData.resolution || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                    <select name="resolution" value={formData.resolution || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                       <option value="">Selecciona una resolución</option>
                       <option value="1920x1080 (HD 1080P)">1920x1080 (HD 1080P)</option>
                       <option value="3840x2160 (4K UHD)">3840x2160 (4K UHD)</option>
@@ -345,7 +345,7 @@ export default function AddMoviePage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Formato / Calidad</label>
-                    <select name="format" value={formData.format || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                    <select name="format" value={formData.format || ''} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                       <option value="">Selecciona un formato</option>
                       <option value="BDRIP">BDRIP</option>
                       <option value="WEB-DL">WEB-DL</option>
@@ -360,15 +360,15 @@ export default function AddMoviePage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Tamaño</label>
-                    <input name="file_size" value={formData.file_size} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                    <input name="file_size" value={formData.file_size} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Contraseña</label>
-                    <input name="password" value={formData.password} onChange={handleChange} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
+                    <input name="password" value={formData.password} onChange={handleChange} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-xs font-bold tracking-wider text-violet-400 uppercase">Categoría</label>
-                    <select name="category" value={formData.category || 'Película'} onChange={handleChange as any} className="w-full bg-black/40 border border-[#1f1f23] focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
+                    <select name="category" value={formData.category || 'Película'} onChange={handleChange as any} className="w-full bg-black/40 border border-border focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none appearance-none">
                       <option value="Película">Película</option>
                       <option value="SeriesTV">Series TV</option>
                       <option value="Anime">Anime</option>
@@ -384,7 +384,7 @@ export default function AddMoviePage() {
                   </div>
                   <div className="space-y-3 md:col-span-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Pistas de Audio (INFORMACIÓN GENERAL)</label>
-                    <p className="text-xs text-gray-500">Cada entrada es un "Audio #N" en la ficha técnica. Ej: <span className="text-cyan-400">Latino AC3 5.1</span></p>
+                    <p className="text-xs text-gray-500">Cada entrada es un "Audio #N" en la ficha técnica. Ej: <span className="text-accent-hover">Latino AC3 5.1</span></p>
                     <div className="flex flex-col gap-2">
                       {(formData.audio_languages || ['']).map((lang: string, idx: number) => (
                         <div key={idx} className="flex items-center gap-2">
@@ -398,7 +398,7 @@ export default function AddMoviePage() {
                                 newArr[idx] = e.target.value ? `${e.target.value} ${codec}` : '';
                                 setFormData({ ...formData, audio_languages: newArr });
                               }}
-                              className="flex-1 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                              className="flex-1 bg-black/40 border border-border focus:border-accent/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
                             >
                               <option value="">Seleccionar idioma</option>
                               <option value="Latino">Latino</option>
@@ -419,7 +419,7 @@ export default function AddMoviePage() {
                                 newArr[idx] = `${base} ${e.target.value}`;
                                 setFormData({ ...formData, audio_languages: newArr });
                               }}
-                              className="w-36 bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
+                              className="w-36 bg-black/40 border border-border focus:border-accent/50 rounded-lg px-3 py-2 text-white text-sm outline-none appearance-none"
                             >
                               <option value="AC3 5.1">AC3 5.1</option>
                               <option value="AC3 2.0">AC3 2.0</option>
@@ -448,7 +448,7 @@ export default function AddMoviePage() {
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, audio_languages: [...(formData.audio_languages || []), 'Latino AC3 5.1'] })}
-                      className="flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition-colors mt-1 border border-cyan-500/30 hover:border-cyan-500/60 px-3 py-1.5 rounded-lg"
+                      className="flex items-center gap-1.5 text-xs font-bold text-accent-hover hover:text-accent-hover transition-colors mt-1 border border-accent/30 hover:border-accent/60 px-3 py-1.5 rounded-lg"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
                       Añadir pista de audio
@@ -456,12 +456,12 @@ export default function AddMoviePage() {
                   </div>
                   <div className="space-y-2 md:col-span-2">
                     <label className="text-xs font-bold tracking-wider text-gray-400 uppercase">Sinopsis</label>
-                    <textarea name="description" value={formData.description} onChange={handleChange} rows={5} className="w-full bg-black/40 border border-[#1f1f23] focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none resize-none" />
+                    <textarea name="description" value={formData.description} onChange={handleChange} rows={5} className="w-full bg-black/40 border border-border focus:border-accent/50 focus:ring-1 focus:ring-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none resize-none" />
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#121215]/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-[#1f1f23] shadow-xl">
+              <div className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-border shadow-xl">
                 <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                   <span className="w-2 h-6 bg-purple-500 rounded-full inline-block"></span>
                   Enlaces de Descarga
@@ -513,7 +513,7 @@ export default function AddMoviePage() {
 
                 {/* Free Links */}
                 <div>
-                  <label className="text-xs font-bold tracking-wider text-cyan-400 uppercase flex items-center gap-2 mb-3">
+                  <label className="text-xs font-bold tracking-wider text-accent-hover uppercase flex items-center gap-2 mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                     ENLACES PÚBLICOS (FREE)
                   </label>
@@ -528,7 +528,7 @@ export default function AddMoviePage() {
                             setFormData({ ...formData, links_free: updated });
                           }}
                           placeholder="Servidor"
-                          className="w-28 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
+                          className="w-28 bg-accent/5 border border-accent/20 focus:border-accent/50 rounded-lg px-3 py-3 text-white transition-all outline-none text-sm"
                         />
                         <input
                           value={link.url || ''}
@@ -538,7 +538,7 @@ export default function AddMoviePage() {
                             setFormData({ ...formData, links_free: updated });
                           }}
                           placeholder="https://..."
-                          className="flex-1 bg-cyan-500/5 border border-cyan-500/20 focus:border-cyan-500/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
+                          className="flex-1 bg-accent/5 border border-accent/20 focus:border-accent/50 rounded-lg px-4 py-3 text-white transition-all outline-none"
                         />
                         <button
                           onClick={() => {
@@ -551,7 +551,7 @@ export default function AddMoviePage() {
                     ))}
                     <button
                       onClick={() => setFormData({ ...formData, links_free: [...(formData.links_free || []), { url: '', server: 'Free' }] })}
-                      className="w-full py-2.5 rounded-lg border border-dashed border-cyan-500/30 text-cyan-500/60 hover:text-cyan-500 hover:border-cyan-500/60 text-sm font-bold transition-colors"
+                      className="w-full py-2.5 rounded-lg border border-dashed border-accent/30 text-accent/60 hover:text-accent hover:border-accent/60 text-sm font-bold transition-colors"
                     >+ Añadir enlace Free</button>
                   </div>
                 </div>

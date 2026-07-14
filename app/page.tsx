@@ -31,9 +31,9 @@ export default async function Home() {
         
         {/* Main Content Area */}
         <div className="max-w-7xl mx-auto px-4 py-12 w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 border-b border-[#1f1f23] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4 border-b border-border pb-4">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-[#0a1515] border border-[#00d0d0]/20 flex items-center justify-center text-[#00d0d0]">
+              <div className="w-10 h-10 rounded-lg bg-[#0a1515] border border-[#00d0d0]/20 flex items-center justify-center text-accent">
                 <Clock className="w-5 h-5" />
               </div>
               <div>

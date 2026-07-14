@@ -25,13 +25,13 @@ export default function RegistroPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md relative">
         <div className="absolute inset-0 bg-purple-500/10 blur-[80px] rounded-full" />
         
-        <div className="bg-[#121215]/80 backdrop-blur-xl border border-[#1f1f23] rounded-2xl p-8 relative shadow-2xl">
+        <div className="bg-surface/80 backdrop-blur-xl border border-border rounded-2xl p-8 relative shadow-2xl">
           <div className="flex justify-center mb-8">
-            <div className="w-16 h-16 bg-[#16161a] border border-[#1f1f23] rounded-2xl flex items-center justify-center shadow-inner">
+            <div className="w-16 h-16 bg-surface border border-border rounded-2xl flex items-center justify-center shadow-inner">
               <UserPlus className="w-8 h-8 text-purple-500" />
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function RegistroPage() {
                   name="username"
                   required
                   placeholder="Tu alias"
-                  className="w-full bg-[#0a0a0f] border border-[#1f1f23] focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
+                  className="w-full bg-background border border-border focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
                 />
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function RegistroPage() {
                   name="email"
                   required
                   placeholder="correo@ejemplo.com"
-                  className="w-full bg-[#0a0a0f] border border-[#1f1f23] focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
+                  className="w-full bg-background border border-border focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
                 />
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function RegistroPage() {
                   name="password"
                   required
                   placeholder="••••••••"
-                  className="w-full bg-[#0a0a0f] border border-[#1f1f23] focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
+                  className="w-full bg-background border border-border focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 rounded-lg pl-10 pr-4 py-3 text-white transition-all outline-none"
                 />
               </div>
             </div>

@@ -14,16 +14,16 @@ export default function ContactoPage() {
   const telegramAdminUrl = "https://t.me/elpapujosh";
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a0f] text-white">
+    <div className="min-h-screen flex flex-col bg-background text-white">
       <Header />
       
       <main className="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-20 relative">
         {/* Glow Effects */}
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-lg h-[300px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-lg h-[300px] bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="text-center mb-12 relative z-10">
-          <div className="w-16 h-16 bg-[#00d0d0]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#00d0d0]/20 shadow-[0_0_30px_rgba(0,208,208,0.15)]">
-            <MessageCircle className="w-8 h-8 text-[#00d0d0]" />
+          <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#00d0d0]/20 shadow-[0_0_30px_rgba(0,208,208,0.15)]">
+            <MessageCircle className="w-8 h-8 text-accent" />
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">Contacto</h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg">
@@ -33,7 +33,7 @@ export default function ContactoPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           {/* Tarjeta Principal de Telegram */}
-          <div className="bg-[#121215] border border-[#1f1f23] hover:border-[#0098ea]/50 rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_10px_40px_rgba(0,152,234,0.15)] group">
+          <div className="bg-surface border border-border hover:border-[#0098ea]/50 rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-[0_10px_40px_rgba(0,152,234,0.15)] group">
             <div className="w-14 h-14 bg-[#0098ea]/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
               <Send className="w-6 h-6 text-[#0098ea] ml-1" />
             </div>
@@ -53,7 +53,7 @@ export default function ContactoPage() {
 
           {/* Opciones Secundarias */}
           <div className="flex flex-col gap-6">
-            <div className="bg-[#121215] border border-[#1f1f23] rounded-2xl p-6 flex gap-4">
+            <div className="bg-surface border border-border rounded-2xl p-6 flex gap-4">
               <div className="w-10 h-10 bg-purple-500/10 rounded-xl flex items-center justify-center shrink-0">
                 <HelpCircle className="w-5 h-5 text-purple-400" />
               </div>
@@ -66,7 +66,7 @@ export default function ContactoPage() {
               </div>
             </div>
 
-            <div className="bg-[#121215] border border-[#1f1f23] rounded-2xl p-6 flex gap-4">
+            <div className="bg-surface border border-border rounded-2xl p-6 flex gap-4">
               <div className="w-10 h-10 bg-red-500/10 rounded-xl flex items-center justify-center shrink-0">
                 <ShieldAlert className="w-5 h-5 text-red-400" />
               </div>
